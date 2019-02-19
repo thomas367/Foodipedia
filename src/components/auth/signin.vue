@@ -20,12 +20,15 @@
 
 
 <style scoped lang="scss">
+
+@import "../../styles.scss";
+
 	.signin-form{
 		width: 400px;
 		margin: 30px auto;
 		border: 1px solid #cccccc;
 		padding: 20px;
-		box-shadow: 0, 2px, 3px #111;
+		box-shadow: 0, 2px, 3px #cccccc;
 	}
 
 	.input{
@@ -39,15 +42,15 @@
 
 		input{
 			font: inherit;
-			width: 100px;
+			width: 150px;
 			padding: 6px 12px;
 			border-sizing: border-box;
-			border: 1px solid #cccccc;
+			border: 1px solid $colorLightGrey;
 		}
 
 		input:focus{
 			outline: none;
-			border: 1px solid #f6bc07;
+			border: 1px solid $colorLightGrey;
 			background-color: #ffffff;
 		}
 	}
@@ -55,16 +58,17 @@
 	.submit{
 			
 		button{
-			border: 1px solid #f6bc07;
-			color: #f6bc07;
+			border: 1px solid $colorLightGrey;
+			color: #ffffff;
 			padding: 10px 20px;
 			font: inherit;
 			cursor: pointer;
+			background-color: $colorLightGrey;
 		}
 
 		button:hover, button:active{
-			background-color: #f6bc07;
-			color: white;
+			background-color: #ffffff;
+			color: $colorLightGrey;
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{

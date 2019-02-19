@@ -1,21 +1,15 @@
 <template>
-	<header class="main-header">
-		<div class="row">
-			<div class="col-xs-2 logo-name">
-				<router-link to='/'>Foodipedia</router-link>
-			</div>
-			<div class="offset-xs-4 col-xs-2 searchbar">
-				<input class="search-input" type="text" placeholder="Search...">
-	            <a href="#" class="search-icon"><i class="icon ion-md-search"></i></a>
-			</div>
-		</div>
+	<header class="main-header">	
+		<div class="col-3 logo-name">
+			<router-link to='/'>Foodipedia</router-link>
+		</div>			
 		<nav>
 			<ul>
 				<li>
-					<router-link to="/signin">Sign In</router-link>
+					<router-link to="/signin" tag="button">Sign In</router-link>
 				</li>
 				<li>
-					<router-link to="/signup">Sign Up</router-link>
+					<router-link to="/signup" tag="button">Sign Up</router-link>
 				</li>
 			</ul>
 		</nav>
@@ -23,13 +17,16 @@
 </template>
 
 <style scoped lang="scss">
+
+@import "../styles.scss";
+
 	.main-header{
 		height: 56px;
 		display: flex;
 		flex-flow: row;
 		justify-content: space-between;
 		align-items: center;
-		background-color: #f6bc07;
+		background-color: $colorLightBlack;
 		padding: 0 20px;
 	}
 
@@ -48,39 +45,7 @@
 		color: white;
 	}
 
-	.searchbar{
-		margin-bottom: auto;
-	    margin-top: auto;
-	    height: 52px;
-	    background-color: #ffffff;
-	    border-radius: 15px;
-	    padding: 10px;
-	    display: inline-block;
-
-	    .search-input{
-	    	color: black;
-		    border: 0;
-		    outline: 0;
-		    background: none;
-		    padding: 0 10px;
-		    width: 120px;
-		    line-height: 37px;
-		    transition: width 0.4s linear;
-	    }
-
-	    .search-icon{
-	    	height: 37px;
-		    width: 37px;
-		    float: right;
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    border-radius: 15%;
-		    background: #9c9c9c;
-    		color: #f6bc07;
-	    }
-	}
-
+	
 	nav{
 		height: 100%
 	}
@@ -94,20 +59,20 @@
 		flex-flow: row;
 		align-items: center;
 	}
-	
-	li{
-		margin: 0 16px;
+				
+	button{
+		background-color: transparent;
 		padding: 9px;
+		margin: 0 13px;
 		border: 1px solid #ffffff;
-		
-		a{
-			text-decoration: none;
-			color: white;
-		}
-
-		a:hover, a:active{
-			color: #fa923f;
-		}
+		text-decoration: none;
+		color: white;
 	}
-	
+
+	button:hover, button:active{
+		color: $colorLightGrey;
+		background-color: white;
+		border: 1px solid $colorLightGrey;
+	}
+		
 </style>
