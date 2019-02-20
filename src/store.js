@@ -26,15 +26,29 @@ export default new Vuex.Store({
   		})
   		.then(response => {
   			console.log(response);
-  		});
+  		})
+      .catch(error => {
+        console.log(error.response);
+      });
   	},
   	/*** Register Action ***/
   	signup({commit}, authData){
-
+      axios.post('http://localhost:8000/api/register', {
+        username: authData.username,
+        password: authData.password,
+        confirmPassword :authData.confirmPassword
+      })
+      .then(response =>{
+          console.log(response);
+      })
+      .catch(error =>{
+        console.log(error.response);
+      });
   	},
   	/*** Logout Action ***/
   	logout({commit}){
   		commit('clearAuthData')
+      //TODO: push to welcome component
   	},
   	/*** On refresh page keeps the user connected ***/
   	keepLogin({commit}){

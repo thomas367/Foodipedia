@@ -26,6 +26,29 @@
 	</div>
 </template>
 
+<script>
+
+	export default{
+
+		data(){
+			return{
+				username: '',
+				password: '',
+				confirmPassword: ''
+			}
+		},
+		methods: {
+			onSubmit() {
+				const formData = {
+					username: this.username,
+					password: this.password,
+					confirmPassword: this.confirmPassword
+				}
+				this.$store.dispatch('signup', {username: formData.username, password: formData.password, confirmPassword: formData.confirmPassword})
+			}	
+		}
+	}
+</script>
 
 
 <style scoped lang="scss">
