@@ -35,7 +35,7 @@
 	.signup-form {
 	    width: 400px;
 	    margin: 30px auto;
-	    border: 1px solid #eeeeee;
+	    border: 1px solid #cccccc;
 	    padding: 20px;
 	    box-shadow: 0 2px 3px #cccccc;
 	  }
@@ -79,6 +79,7 @@
 			color: #ffffff;
 			padding: 10px 20px;
 			font: inherit;
+			border-radius: 10px;
 			cursor: pointer;
 			background-color: $colorLightGrey;
 		}

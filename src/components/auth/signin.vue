@@ -18,6 +18,26 @@
 	</div>
 </template>
 
+<script>
+	export default{
+		data(){
+			return {
+				username: '',
+				password: ''
+			}
+		},
+		methods: {
+			onSubmit(){
+				const formData = {
+					username: this.username,
+					password: this.password
+				}
+				this.$store.dispatch('login', {username: formData.username, password: formData.password})
+			}
+		}
+	}
+</script>
+
 
 <style scoped lang="scss">
 
@@ -62,6 +82,7 @@
 			color: #ffffff;
 			padding: 10px 20px;
 			font: inherit;
+			border-radius: 10px;
 			cursor: pointer;
 			background-color: $colorLightGrey;
 		}
