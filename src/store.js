@@ -11,7 +11,7 @@ export default new Vuex.Store({
   },
   mutations: {
   	authUser(state, userData){
-  		state.idToken = userData.Token
+  		state.idToken = userData.token
   	},
   	clearAuthData(state){
   		state.idToken = null
@@ -25,7 +25,11 @@ export default new Vuex.Store({
   			password: authData.password
   		})
   		.then(response => {
-  			console.log(response);
+  			//console.log(response);
+        commit('authUser', {
+          token: response.data.token
+        })
+        localStorage.setItem('token', response.data.token);
   		})
       .catch(error => {
         console.log(error.response);
@@ -39,7 +43,11 @@ export default new Vuex.Store({
         confirmPassword :authData.confirmPassword
       })
       .then(response =>{
-          console.log(response);
+          //console.log(response);
+          commit('authUser', {
+          token: response.data.token
+        })
+        localStorage.setItem('token', response.data.token);
       })
       .catch(error =>{
         console.log(error.response);
@@ -48,12 +56,18 @@ export default new Vuex.Store({
   	/*** Logout Action ***/
   	logout({commit}){
   		commit('clearAuthData')
-      //TODO: push to welcome component
+      localStorage.removeItem('token')
+      /*** router.replace('/welcome') ***/
   	},
   	/*** On refresh page keeps the user connected ***/
   	keepLogin({commit}){
-
+      const token = localStorage.getItem('token')
+      if(!token){
+        return
+      }
+      commit('authUser', {
+        token: token
+      })
   	}
-
   }
 })
