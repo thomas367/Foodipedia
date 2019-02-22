@@ -25,11 +25,19 @@ export default new Vuex.Store({
   			password: authData.password
   		})
   		.then(response => {
-  			//console.log(response);
-        commit('authUser', {
-          token: response.data.token
-        })
-        localStorage.setItem('token', response.data.token);
+  			console.log(response);
+        if(response.data.success === true){
+          
+          commit('authUser', {
+            token: response.data.token
+          })
+          localStorage.setItem('token', response.data.token);
+          
+        }
+        else if(response.data.success === false){
+          //TODO: Message the user there are empty fields
+
+        }
   		})
       .catch(error => {
         console.log(error.response);
@@ -40,14 +48,19 @@ export default new Vuex.Store({
       axios.post('http://localhost:8000/api/register', {
         username: authData.username,
         password: authData.password,
-        confirmPassword :authData.confirmPassword
+        password_confirmation :authData.password_confirmation
       })
       .then(response =>{
-          //console.log(response);
-          commit('authUser', {
-          token: response.data.token
-        })
-        localStorage.setItem('token', response.data.token);
+        console.log(response);
+        if(response.data.success === true){
+            commit('authUser', {
+            token: response.data.token
+          })
+          localStorage.setItem('token', response.data.token);
+        }
+        else if(response.data.success === false){
+          //TODO: Message the user about the error
+        }
       })
       .catch(error =>{
         console.log(error.response);
@@ -69,5 +82,10 @@ export default new Vuex.Store({
         token: token
       })
   	}
-  }
+  },
+  getters: {
+    isAuthenticated (state){
+      return state.idToken !== null 
+    }
+  } 
 })

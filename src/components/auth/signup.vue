@@ -15,7 +15,7 @@
         
 		        <div class="input">
 		          <label for="confirm-password">Confirm Password</label>
-		          <input type="password" id="confirm-password" v-model="confirmPassword">
+		          <input type="password" id="confirm-password" v-model="password_confirmation">
 		        </div>
 		        
 		        <div class="submit">
@@ -34,7 +34,7 @@
 			return{
 				username: '',
 				password: '',
-				confirmPassword: ''
+				password_confirmation: ''
 			}
 		},
 		methods: {
@@ -42,9 +42,9 @@
 				const formData = {
 					username: this.username,
 					password: this.password,
-					confirmPassword: this.confirmPassword
+					password_confirmation: this.password_confirmation
 				}
-				this.$store.dispatch('signup', {username: formData.username, password: formData.password, confirmPassword: formData.confirmPassword})
+				this.$store.dispatch('signup', {username: formData.username, password: formData.password, password_confirmation: formData.password_confirmation})
 			}	
 		}
 	}
