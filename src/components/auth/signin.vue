@@ -2,16 +2,16 @@
 	<div id="signin">
 		<div class="signin-form">
 			<form @submit.prevent="onSubmit">
-				<div class="input">
+				<div class="input" :class="{invalid: $v.username.$error}">
 					<label for="username">Username</label>
-					<input type="text" id="username" v-model="username">
+					<input type="text" id="username" @blur="$v.username.$touch()" v-model="username">
 				</div>
-				<div class="input">
+				<div class="input" :class="{invalid: $v.password.$error}">
 					<label for="password">Password</label>
-					<input type="password" id="password" v-model="password">
+					<input type="password" id="password" @blur="$v.password.$touch()" v-model="password">
 				</div>
 				<div class="submit">
-					<button type="submit">Submit</button>
+					<button type="submit" :disabled="$v.$invalid">Submit</button>
 				</div>
 			</form>
 		</div>
@@ -19,11 +19,21 @@
 </template>
 
 <script>
+	import {required} from 'vuelidate/lib/validators'
+
 	export default{
 		data(){
 			return {
 				username: '',
 				password: ''
+			}
+		},
+		validations: {
+			username: {
+				required
+			},
+			password: {
+				required
 			}
 		},
 		methods: {
@@ -74,6 +84,15 @@
 			background-color: #ffffff;
 		}
 	}
+
+	.input.invalid label{
+  		color: red;
+  	}
+
+  	.input.invalid input{
+  		border: 1px solid red;
+  		background-color: #ffc9aa;
+  	}
 	
 	.submit{
 			
@@ -93,9 +112,9 @@
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{
-			border: 1px solid #ffffff;
+			border: 1px solid #cccccc;
 			background-color: transparent;
-			color: #ffffff;
+			color: #cccccc;
 			cursor: not-allowed;
 		}
 	}

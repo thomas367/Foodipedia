@@ -3,23 +3,23 @@
 		<div class="signup-form">
 			<form @submit.prevent="onSubmit">
 		        
-		        <div class="input">
+		        <div class="input" :class="{invalid: $v.username.$error}">
 		          <label for="username">Username</label>
-		          <input type="text" id="text" v-model="username">
+		          <input type="text" id="text" @blur="$v.username.$touch()" v-model="username">
 		        </div>
 
-		        <div class="input">
+		        <div class="input" :class="{invalid: $v.password.$error}">
 		          <label for="password">Password</label>
-		          <input type="password" id="password" v-model="password">
+		          <input type="password" id="password" @blur="$v.password.$touch()" v-model="password">
 		        </div>
         
-		        <div class="input">
+		        <div class="input" :class="{invalid: $v.password_confirmation.$error}">
 		          <label for="confirm-password">Confirm Password</label>
-		          <input type="password" id="confirm-password" v-model="password_confirmation">
+		          <input type="password" id="confirm-password" @blur="$v.password_confirmation.$touch()" v-model="password_confirmation">
 		        </div>
 		        
 		        <div class="submit">
-		          <button type="submit">Submit</button>
+		          <button type="submit" :disabled="$v.$invalid">Submit</button>
 		        </div>
       		</form>
 		</div>
@@ -27,14 +27,27 @@
 </template>
 
 <script>
-
+	import {required, minLength, sameAs} from 'vuelidate/lib/validators'
+	
 	export default{
-
 		data(){
 			return{
 				username: '',
 				password: '',
 				password_confirmation: ''
+			}
+		},
+		validations: {
+			username: {
+				required,
+				minLen: minLength(6)
+			},
+			password: {
+				required,
+				minLen: minLength(6)
+			},
+			password_confirmation: {
+				sameAs: sameAs('password')
 			}
 		},
 		methods: {
@@ -95,6 +108,15 @@
     	width: auto;
   	} 
 
+  	.input.invalid label{
+  		color: red;
+  	}
+
+  	.input.invalid input{
+  		border: 1px solid red;
+  		background-color: #ffc9aa;
+  	}
+
 	.submit{
 			
 		button{
@@ -113,9 +135,9 @@
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{
-			border: 1px solid #ffffff;
+			border: 1px solid #cccccc;
 			background-color: transparent;
-			color: #ffffff;
+			color: #cccccc;
 			cursor: not-allowed;
 		}
   	}
