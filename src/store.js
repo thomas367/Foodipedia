@@ -57,6 +57,7 @@ export default new Vuex.Store({
             token: response.data.token
           })
           localStorage.setItem('token', response.data.token);
+          router.replace('/welcome')
         }
         else if(response.data.success === false){
           //TODO: Message the user about the error

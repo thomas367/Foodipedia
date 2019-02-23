@@ -1,9 +1,9 @@
-/********       VARIABLES       ********/
+/*****     VARIABLES     *****/
 
 $colorLightBlack: #383838;
 $colorLightGrey: #545454;
 
-/********       MIXINS       ********/
+/*****     MIXINS     *****/
 
 $tablet-width: 768px;
 $desktop-width: 992px;
@@ -35,3 +35,13 @@ $large-desktop-width: 1200px;
     transform:translate(-50%, -50%);
 }
 
+/*****     REUSABLE     *****/
+
+.input.invalid label{
+      color: red;
+    }
+
+    .input.invalid input{
+      border: 1px solid red;
+      background-color: #ffc9aa;
+    }

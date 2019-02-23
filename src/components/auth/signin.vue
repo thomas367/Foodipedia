@@ -84,15 +84,6 @@
 			background-color: #ffffff;
 		}
 	}
-
-	.input.invalid label{
-  		color: red;
-  	}
-
-  	.input.invalid input{
-  		border: 1px solid red;
-  		background-color: #ffc9aa;
-  	}
 	
 	.submit{
 			

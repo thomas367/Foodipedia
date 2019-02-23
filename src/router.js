@@ -40,7 +40,8 @@ export default new Router({
     },
     {
       path: '/recipeForm',
-      component: recipeFormPage,
+      component: recipeFormPage
+      /*
       beforeEnter(to, from, next){
         if(store.state.idToken){
           next()
@@ -49,6 +50,7 @@ export default new Router({
           next('signin')
         }
       }
+      */
     }
   ]
 })
