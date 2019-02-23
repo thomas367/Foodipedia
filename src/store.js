@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from './router'
 
 Vue.use(Vuex)
 
@@ -27,12 +28,11 @@ export default new Vuex.Store({
   		.then(response => {
   			console.log(response);
         if(response.data.success === true){
-          
           commit('authUser', {
             token: response.data.token
           })
           localStorage.setItem('token', response.data.token);
-          
+          router.replace('/welcome')
         }
         else if(response.data.success === false){
           //TODO: Message the user there are empty fields
@@ -70,7 +70,7 @@ export default new Vuex.Store({
   	logout({commit}){
   		commit('clearAuthData')
       localStorage.removeItem('token')
-      /*** router.replace('/welcome') ***/
+      router.replace('/welcome')
   	},
   	/*** On refresh page keeps the user connected ***/
   	keepLogin({commit}){

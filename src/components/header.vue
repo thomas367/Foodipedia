@@ -12,6 +12,9 @@
 					<router-link to="/signup" tag="button">Sign Up</router-link>
 				</li>
 				<li v-if="auth">
+					<router-link to="/myRecipes" tag="button">My recipes</router-link>
+				</li>
+				<li v-if="auth">
 					<button @click="onLogout" class="logout">Logout</button>
 				</li>
 			</ul>
