@@ -28,20 +28,20 @@ $large-desktop-width: 1200px;
 }
 
 @mixin absolute-center($top:auto, $left:auto) {
-    position:absolute;
-    top:$top;
-    left:$left;
-    -webkit-transform:translate(-50%, -50%);
-    transform:translate(-50%, -50%);
+  position:absolute;
+  top:$top;
+  left:$left;
+  -webkit-transform:translate(-50%, -50%);
+  transform:translate(-50%, -50%);
 }
 
 /*****     REUSABLE     *****/
 
-.input.invalid label{
-      color: red;
-    }
+.input.invalid input{
+  border: 1px solid red;
+  background-color: #ffc9aa;
+}
 
-    .input.invalid input{
-      border: 1px solid red;
-      background-color: #ffc9aa;
-    }
+.formErrorsMessages{
+  color: red
+}

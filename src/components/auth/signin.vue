@@ -2,16 +2,19 @@
 	<div id="signin">
 		<div class="signin-form">
 			<form @submit.prevent="onSubmit">
-				<div class="input" :class="{invalid: $v.username.$error}">
+				<div class="input" :class="{invalid: errors.has('username')}">
 					<label for="username">Username</label>
-					<input type="text" id="username" @blur="$v.username.$touch()" v-model="username">
+					<input type="text" id="username" v-model="username" data-vv-name="username" v-validate="'required'">
+					<span class="formErrorsMessages"><br/>{{ errors.first('username') }}</span>
 				</div>
-				<div class="input" :class="{invalid: $v.password.$error}">
+				
+				<div class="input" :class="{invalid: errors.has('password')}">
 					<label for="password">Password</label>
-					<input type="password" id="password" @blur="$v.password.$touch()" v-model="password">
+					<input type="password" id="password" v-model="password" data-vv-name="password" v-validate="'required'">
+					<span class="formErrorsMessages"><br/>{{ errors.first('password') }}</span>
 				</div>
 				<div class="submit">
-					<button type="submit" :disabled="$v.$invalid">Submit</button>
+					<button type="submit" :disabled="errors.any() || !isComplete">Submit</button>
 				</div>
 			</form>
 		</div>
@@ -19,7 +22,6 @@
 </template>
 
 <script>
-	import {required} from 'vuelidate/lib/validators'
 
 	export default{
 		data(){
@@ -28,12 +30,9 @@
 				password: ''
 			}
 		},
-		validations: {
-			username: {
-				required
-			},
-			password: {
-				required
+		computed: {
+			isComplete(){
+				return this.username && this.password
 			}
 		},
 		methods: {
