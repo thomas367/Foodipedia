@@ -36,6 +36,7 @@
 			}
 		},
 		methods: {
+			/* Submit data */
 			onSubmit(){
 				const formData = {
 					username: this.username,
@@ -58,6 +59,7 @@
 		border: 1px solid #cccccc;
 		padding: 20px;
 		box-shadow: 0, 2px, 3px #cccccc;
+
 	}
 
 	.input{
