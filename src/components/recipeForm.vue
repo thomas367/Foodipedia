@@ -1,16 +1,29 @@
 <template>
 	<div id="recipeform">
 		<div class="recipe-form">
-			<form @submit.prevent="onSubmit">
+			<b-form @submit.prevent="onSubmit">
+				<!-- Image section -->
+				
+				<div class="input" :class="{invalid: errors.has('image')}">
+					<label for="image">Image</label>
+					<b-form-file id=image placeholder="Choose an image..." accept="image/*" @change="onImageSelect($event)" data-vv-name="image" v-validate="'required'"/>
+					<div id="preview">
+					    <b-img v-if="url" :src="url" height="150" width="150"/>
+					</div>
+					<span class="formErrorsMessages"><br/>{{ errors.first('image') }}</span>
+				</div>
+	
+				<!-- Recipe name section -->
 				<div class="input" :class="{invalid: errors.has('recipe name')}">
 					<label for="recipe_name">Recipe name</label>
-					<input type="text" id="recipe_name" v-model="recipe_name" data-vv-name="recipe name" v-validate="'required|alpha'">
+					<b-form-input type="text" id="recipe_name" v-model="recipe_name" data-vv-name="recipe name" v-validate="'required|alpha'"/>
 					<span class="formErrorsMessages"><br/>{{ errors.first('recipe name') }}</span>
 				</div>
+				<!-- Cuisine and Category section -->
 				<div class="row">
 					<div class="input" :class="{invalid: errors.has('cuisine')}">
 						<label for="cuisine">Cuisine</label>
-						<select id="cuisine" v-model="cuisine" data-vv-name="cuisine" v-validate="'required'">
+						<b-form-select id="cuisine" v-model="cuisine" data-vv-name="cuisine" v-validate="'required'">
 							<option value="Greek">Greek</option>
 							<option value="Mexican">Mexican</option>
 							<option value="British">British</option>
@@ -21,11 +34,11 @@
 							<option value="Maroccan">Maroccan</option>
 							<option value="Thai">Thai</option>
 							<option value="Peruvian">Peruvian</option>
-						</select>
+						</b-form-select>
 					</div>
 					<div class="input" :class="{invalid: errors.has('category')}">
 						<label for="category">Category</label>
-						<select id="category" v-model="category" data-vv-name="category" v-validate="'required'">
+						<b-form-select id="category" v-model="category" data-vv-name="category" v-validate="'required'">
 							<option value="Breakfast">Breakfast</option>
 							<option value="Brunch">Brunch</option>
 							<option value="Lunch">Lunch</option>
@@ -40,48 +53,44 @@
 							<option value="Baking">Baking</option>
 							<option value="Snacks">Snacks</option>
 							<option value="Appertisers">Appertisers</option>
-						</select>
+						</b-form-select>
 					</div>
 					<span class="formErrorsMessages"><br/>{{ errors.first('cuisine') || errors.first('category') }}</span>
 				</div>
+				<!-- Direction section -->
 				<div class="input" :class="{invalid: errors.has('directions')}">
 					<label for="directions">Directions</label>
-					<textarea class="textarea" v-model="directions" data-vv-name="directions" v-validate="'required'"></textarea>
+					<b-form-textarea class="textarea" rows="3" max-rows="6" v-model="directions" data-vv-name="directions" v-validate="'required'"/>
 					<span class="formErrorsMessages"><br/>{{ errors.first('directions') }}</span>
 				</div>
-				
-				<div class="input" :class="{invalid: errors.has('image')}">
-					<label for="image">Image</label>
-					<input type="file" id=image @change="onImageSelect($event)" data-vv-name="image" v-validate="'required|ext:jpeg,jpg,bmp,gif,png|size:600'">
-					<div id="preview">
-					    <img v-if="url" :src="url" height="150" width="150"/>
-					</div>
-					<span class="formErrorsMessages"><br/>{{ errors.first('image') }}</span>
-				</div>
-				
-			<!--	<div class="ingredients">
-					<button type="button" @click="onAddIngredient">Add ingredients</button> 
+				<!-- Ingredients section -->				
+			<!--	
+				<div class="ingredients">
+					<b-button type="button" @click="onAddIngredient">Add ingredients</b-button> 
 					<div class="ingredients-list">
-						<div class="input" v-for="(ingredientInput, index) in ingredientInputs" :class="{invalid: errors.has('ingredient')}">
+						<div class="input" v-for="(ingredientInput, index) in ingredientInputs" :key="ingredientInput.id" :class="{invalid: errors.has('ingredient')}">
 							<label :for="ingredientInput.id">Ingredient</label> 
-							<input type="text" :id="ingredientInput.id" v-model="ingredientInput.value" data-vv-name="ingredient" v-validate="'required'">
+							<b-form-input type="text" :id="ingredientInput.id" v-model="ingredientInput.value" data-vv-name="ingredient" v-validate="'required'"/>
 							<label :for="ingredientInput.id">Quantity</label> 
-							<input type="text" :id="ingredientInput.id" v-model="ingredientInput.value" data-vv-name="ingredient" v-validate="'required'">
-              				<button @click="onDeleteIngredient(ingredientInput.id)" type="button">X</button> 
+							<b-form-input type="text" :id="ingredientInput.id" v-model="ingredientInput.value" data-vv-name="ingredient" v-validate="'required'"/>
+              				<b-button @click="onDeleteIngredient(ingredientInput.id)" type="button">X</b-button> 
               				<span class="formErrorsMessages"><br/>{{ errors.first('ingredient') }}</span>
               			</div> 
 					</div>
-				</div> -->
+				</div> 
+			-->
 				<div class="submit">
-					<button type="submit" :disabled="errors.any() || !isComplete">Submit</button>
+					<b-button type="submit" :disabled="errors.any() || !isComplete">Submit</b-button>
 				</div>
-			</form>
+			</b-form>
 		</div>
 	</div>
 </template>
 
 <script>
 	import store from '@/store'
+	import axios from 'axios'
+
 	export default{
 		data(){
 			return{
@@ -90,8 +99,8 @@
 				cuisine: '',
 				category: '',
 				directions: '',
-				image: ''
-				//ingredientInputs: []
+				image: null,
+				ingredientInputs: []
 			}
 		},
 		computed: {
@@ -109,6 +118,7 @@
 		        }
 		        this.ingredientInputs.push(newIngredient)
 		    },
+		   
 		    // Remove ingredient
 		    onDeleteIngredient (id) {
 		        this.ingredientInputs = this.ingredientInputs.filter(ingredient => ingredient.id !== id)
@@ -120,7 +130,7 @@
 				this.url = URL.createObjectURL(this.image);
 			},
 			
-		    /* Submit data */
+		    /* Submit recipe action */
 			onSubmit(){
 				const formData = {
 					recipe_name: this.recipe_name,
@@ -128,10 +138,23 @@
 					category: this.category,
 					directions: this.directions,
 					image: this.image
-					//ingredients: this.ingredientInputs.map(ingredient => ingredient.value),
+					//ingredients: this.ingredientInputs.map(ingredient => ingredient.value)
 				}
 				console.log(formData);
-				
+			/*	
+				const token = localStorage.getItem('token');
+				axios.post('http://localhost:8000/api/storeRecipe',formData,{
+					headers: {
+						'Authorization': 'Bearer' + token
+					}
+				})
+				.then(response =>{
+					console.log(response);
+				})
+				.catch(error =>{
+					console.log(error.response);
+				})
+			*/	
 			}
 		}
 	}

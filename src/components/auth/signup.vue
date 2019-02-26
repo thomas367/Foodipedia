@@ -1,29 +1,29 @@
 <template>
 	<div id="signup">
 		<div class="signup-form">
-			<form @submit.prevent="onSubmit">    
+			<b-form @submit.prevent="onSubmit">    
 		        <div class="input" :class="{invalid: errors.has('username')}">
 		          	<label for="username">Username</label>
-		          	<input type="text" id="username" v-model="username" data-vv-name="username" v-validate="'required|min:6'">
+		          	<b-form-input type="text" id="username" v-model="username" data-vv-name="username" v-validate="'required|min:6'"/>
 		          	<span class="formErrorsMessages"><br/>{{ errors.first('username') }}</span>
 		        </div>
 
 		        <div class="input" :class="{invalid: errors.has('password')}">
 		          	<label for="password">Password</label>
-		          	<input type="password" id="password" v-model="password" data-vv-name="password" v-validate="'required|min:6'" ref="password">
+		          	<b-form-input type="password" id="password" v-model="password" data-vv-name="password" v-validate="'required|min:6'" ref="password"/>
 		          	<span class="formErrorsMessages"><br/>{{ errors.first('password') }}</span>
 		        </div>
         
 		        <div class="input" :class="{invalid: errors.has('confirm password')}">
 		          	<label for="confirm-password">Confirm Password</label>
-		          	<input type="password" id="confirm-password" v-model="password_confirmation" data-vv-name="confirm password" v-validate="'required|confirmed:password'">
+		          	<b-form-input type="password" id="confirm-password" v-model="password_confirmation" data-vv-name="confirm password" v-validate="'required|confirmed:password'"/>
 		          	<span class="formErrorsMessages"><br/>{{ errors.first('confirm password') }}</span>
 		        </div>
 		        
 		        <div class="submit">
-		          	<button type="submit" :disabled="errors.any() || !isComplete">Submit</button>
+		          	<b-button type="submit" :disabled="errors.any() || !isComplete">Submit</b-button>
 		        </div>
-      		</form>
+      		</b-form>
 		</div>
 	</div>
 </template>
