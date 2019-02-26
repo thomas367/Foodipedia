@@ -4,83 +4,115 @@
 			<b-form @submit.prevent="onSubmit">
 				<!-- Image section -->
 				
-				<div class="input" :class="{invalid: errors.has('image')}">
-					<label for="image">Image</label>
-					<b-form-file id=image placeholder="Choose an image..." accept="image/*" @change="onImageSelect($event)" data-vv-name="image" v-validate="'required'"/>
-					<div id="preview">
-					    <b-img v-if="url" :src="url" height="150" width="150"/>
+				<div class="row">
+					<div class="image">
+						<div class="input" :class="{invalid: errors.has('image')}">
+							<label for="image">Image</label>
+							<b-form-file id="image" placeholder="Choose an image..." accept="image/*" @change="onImageSelect($event)" data-vv-name="image" v-validate="'required'"/>
+							<div id="preview">
+							    <b-img v-if="url" :src="url" height="150" width="150"/>
+							</div>
+							<span class="formErrorsMessages"><br/>{{ errors.first('image') }}</span>
+						</div>
 					</div>
-					<span class="formErrorsMessages"><br/>{{ errors.first('image') }}</span>
 				</div>
-	
+
 				<!-- Recipe name section -->
-				<div class="input" :class="{invalid: errors.has('recipe name')}">
-					<label for="recipe_name">Recipe name</label>
-					<b-form-input type="text" id="recipe_name" v-model="recipe_name" data-vv-name="recipe name" v-validate="'required|alpha'"/>
-					<span class="formErrorsMessages"><br/>{{ errors.first('recipe name') }}</span>
+				<div class="row">
+					<div class="recipeName">
+						<div class="input" :class="{invalid: errors.has('recipe name')}">
+							<label for="recipe_name">Recipe name</label>
+							<b-form-input type="text" id="recipe_name" v-model="recipe_name" data-vv-name="recipe name" v-validate="'required|alpha'"/>
+							<span class="formErrorsMessages"><br/>{{ errors.first('recipe name') }}</span>
+						</div>
+					</div>
 				</div>
 				<!-- Cuisine and Category section -->
 				<div class="row">
-					<div class="input" :class="{invalid: errors.has('cuisine')}">
-						<label for="cuisine">Cuisine</label>
-						<b-form-select id="cuisine" v-model="cuisine" data-vv-name="cuisine" v-validate="'required'">
-							<option value="Greek">Greek</option>
-							<option value="Mexican">Mexican</option>
-							<option value="British">British</option>
-							<option value="Italian">Italian</option>
-							<option value="French">French</option>
-							<option value="Japanese">Japanese</option>
-							<option value="Chinese">Chinese</option>
-							<option value="Maroccan">Maroccan</option>
-							<option value="Thai">Thai</option>
-							<option value="Peruvian">Peruvian</option>
-						</b-form-select>
+					<div class="cuisine">
+						<div class="input" :class="{invalid: errors.has('cuisine')}">
+							<label for="cuisine">Cuisine</label>
+							<b-form-select id="cuisine" v-model="cuisine" data-vv-name="cuisine" v-validate="'required'">
+								<option value="Greek">Greek</option>
+								<option value="Mexican">Mexican</option>
+								<option value="British">British</option>
+								<option value="Italian">Italian</option>
+								<option value="French">French</option>
+								<option value="Japanese">Japanese</option>
+								<option value="Chinese">Chinese</option>
+								<option value="Maroccan">Maroccan</option>
+								<option value="Thai">Thai</option>
+								<option value="Peruvian">Peruvian</option>
+							</b-form-select>
+						</div>
 					</div>
-					<div class="input" :class="{invalid: errors.has('category')}">
-						<label for="category">Category</label>
-						<b-form-select id="category" v-model="category" data-vv-name="category" v-validate="'required'">
-							<option value="Breakfast">Breakfast</option>
-							<option value="Brunch">Brunch</option>
-							<option value="Lunch">Lunch</option>
-							<option value="Dinner">Dinner</option>
-							<option value="Salads">Salads</option>
-							<option value="Soups">Soups</option>
-							<option value="Meat">Meat</option>
-							<option value="Seafood">Seafood</option>
-							<option value="Vegeterian">Vegeterian</option>
-							<option value="Drinks">Drinks</option>
-							<option value="Desserts">Desserts</option>
-							<option value="Baking">Baking</option>
-							<option value="Snacks">Snacks</option>
-							<option value="Appertisers">Appertisers</option>
-						</b-form-select>
+					<div class="space">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+					<div class="category">
+						<div class="input" :class="{invalid: errors.has('category')}">
+							<label for="category">Category</label>
+							<b-form-select id="category" v-model="category" data-vv-name="category" v-validate="'required'">
+								<option value="Breakfast">Breakfast</option>
+								<option value="Brunch">Brunch</option>
+								<option value="Lunch">Lunch</option>
+								<option value="Dinner">Dinner</option>
+								<option value="Salads">Salads</option>
+								<option value="Soups">Soups</option>
+								<option value="Meat">Meat</option>
+								<option value="Seafood">Seafood</option>
+								<option value="Vegeterian">Vegeterian</option>
+								<option value="Drinks">Drinks</option>
+								<option value="Desserts">Desserts</option>
+								<option value="Baking">Baking</option>
+								<option value="Snacks">Snacks</option>
+								<option value="Appertisers">Appertisers</option>
+							</b-form-select>
+						</div>
 					</div>
 					<span class="formErrorsMessages"><br/>{{ errors.first('cuisine') || errors.first('category') }}</span>
 				</div>
 				<!-- Direction section -->
-				<div class="input" :class="{invalid: errors.has('directions')}">
-					<label for="directions">Directions</label>
-					<b-form-textarea class="textarea" rows="3" max-rows="6" v-model="directions" data-vv-name="directions" v-validate="'required'"/>
-					<span class="formErrorsMessages"><br/>{{ errors.first('directions') }}</span>
+				<div class="row">
+					<div class="description">
+						<div class="input" :class="{invalid: errors.has('directions')}">
+							<label for="directions">Directions</label>
+							<b-form-textarea class="textarea" rows="3" max-rows="6" v-model="directions" data-vv-name="directions" v-validate="'required'"/>
+							<span class="formErrorsMessages"><br/>{{ errors.first('directions') }}</span>
+						</div>
+					</div>
 				</div>
 				<!-- Ingredients section -->				
-			<!--	
-				<div class="ingredients">
-					<b-button type="button" @click="onAddIngredient">Add ingredients</b-button> 
-					<div class="ingredients-list">
-						<div class="input" v-for="(ingredientInput, index) in ingredientInputs" :key="ingredientInput.id" :class="{invalid: errors.has('ingredient')}">
-							<label :for="ingredientInput.id">Ingredient</label> 
-							<b-form-input type="text" :id="ingredientInput.id" v-model="ingredientInput.value" data-vv-name="ingredient" v-validate="'required'"/>
-							<label :for="ingredientInput.id">Quantity</label> 
-							<b-form-input type="text" :id="ingredientInput.id" v-model="ingredientInput.value" data-vv-name="ingredient" v-validate="'required'"/>
-              				<b-button @click="onDeleteIngredient(ingredientInput.id)" type="button">X</b-button> 
-              				<span class="formErrorsMessages"><br/>{{ errors.first('ingredient') }}</span>
-              			</div> 
+				
+				<div class="row">
+					<div class="ingredients">
+						<b-button type="button" size="sm" @click="onAddIngredient">Add ingredients</b-button> 
+						<div class="ingredients-list">
+							<div class="input" v-for="(ingredient, index) in ingredients" :class="{invalid: errors.has('ingredient'+index) || errors.has('quantity'+index)}">
+								<div class="row">
+									<div class="ingredient">
+										<label :for="ingredient">Ingredient</label> 
+										<b-form-input type="text" id="ingredient" v-model="ingredient.ingredient" :data-vv-name="'ingredient'+index" v-validate="'required'"/>
+									</div>
+									<div class="space">&nbsp;</div>
+									<div class="quantity">
+										<label :for="ingredient">Quantity</label> 
+										<b-form-input type="text" id="ingredient" v-model="ingredient.quantity" :data-vv-name="'quantity'+index" v-validate="'required'"/>
+		              				</div>
+		              				<div class="space">&nbsp;</div>
+		              				<div class="removeBtn">
+		              					<div class="space">&nbsp;</div>
+		              					<b-button @click="onDeleteIngredient(index)" type="button" size="sm">X</b-button>
+		              				</div>
+		              			</div>
+		              			<span class="formErrorsMessages"><br/>{{ errors.first('ingredient') || errors.first('quantity') }}</span>
+	              			</div> 
+						</div>
 					</div>
-				</div> 
-			-->
-				<div class="submit">
-					<b-button type="submit" :disabled="errors.any() || !isComplete">Submit</b-button>
+				</div>
+		
+				<div class="row">
+					<div class="submit">
+						<b-button type="submit" :disabled="errors.any() || !isComplete">Submit</b-button>
+					</div>
 				</div>
 			</b-form>
 		</div>
@@ -100,31 +132,28 @@
 				category: '',
 				directions: '',
 				image: null,
-				ingredientInputs: []
+				ingredients: []
 			}
 		},
 		computed: {
 			isComplete(){
-				return this.recipe_name && this.cuisine && this.category && this.directions && this.image
+				return this.recipe_name && this.cuisine && this.category && this.directions && this.image && this.ingredients
 			}
 		},
 		methods: {
-		/*	
-			// Add ingredient
+			/* Add ingredient */
 			onAddIngredient () {
-		        const newIngredient = {
-		          	id: Math.random() * Math.random() * 1000,
-		          	value: ''
-		        }
-		        this.ingredientInputs.push(newIngredient)
+		        this.ingredients.push({
+		        	ingredient: '',
+		        	quantity: ''
+		        })  
 		    },
-		   
-		    // Remove ingredient
-		    onDeleteIngredient (id) {
-		        this.ingredientInputs = this.ingredientInputs.filter(ingredient => ingredient.id !== id)
+		    /* Remove ingredient */
+		    onDeleteIngredient (index) {
+		        this.ingredients.splice(index, 1)
 		    },
-		*/
-			/* Get image from input */
+		
+			/* Get image from input and preview action */
 			onImageSelect(event){
 				this.image = event.target.files[0];
 				this.url = URL.createObjectURL(this.image);
@@ -137,8 +166,9 @@
 					cuisine: this.cuisine,
 					category: this.category,
 					directions: this.directions,
-					image: this.image
-					//ingredients: this.ingredientInputs.map(ingredient => ingredient.value)
+					image: this.image,
+					ingredient: this.ingredients.map(ingredient => ingredient.ingredient),
+					quantity: this.ingredients.map(ingredient => ingredient.quantity)
 				}
 				console.log(formData);
 			/*	
@@ -165,11 +195,15 @@
 @import "../styles.scss";
 
 	.recipe-form{
-		width: 400px;
+		width: 500px;
 		margin: 30px auto;
 		border: 1px solid #cccccc;
 		padding: 20px;
 		box-shadow: 0, 2px, 3px #cccccc;
+	}
+
+	.image, .recipeName, .cuisine, .description, .ingredients, .ingredients-list, .submit{
+		padding-left: 12px;
 	}
 
 	.input{
@@ -180,9 +214,13 @@
 			margin-bottom: 6px;
 			color: #4e4e4e;
 		}
+		
+		#image{
+			width: 400px;
+		}
 
 		#recipe_name {
-			width: 150px;
+			width: 400px;
 			padding: 6px 12px;
 			font: inherit;
 			border-sizing: border-box;
@@ -190,7 +228,7 @@
 		}
 
 		#cuisine, #category {
-			width: 150px;
+			width: 190px;
 			padding: 6px 12px;
 			font: inherit;
 			border-sizing: border-box;
@@ -198,20 +236,14 @@
 		}
 
 		.textarea {
-			width: 350px;
+			width: 400px;
 			height: 90px;
 			padding: 6px 12px;
 			font: inherit;
 			border-sizing: border-box;
 			border: 1px solid $colorLightGrey;
 		}
-
-		input:focus, textarea:focus, select:focus{
-			outline: none;
-			border: 1px solid $colorLightGrey;
-			background-color: #ffffff;
-		}
-
+	
 		.input select {
 		   border: 1px solid #cccccc;
 		   font: inherit;
@@ -224,8 +256,12 @@
 		}
 	}
 
+	.ingredients{
+
+	}
+
 	.submit{
-			
+		margin-top: 20px;	
 		button{
 			border: 1px solid $colorLightGrey;
 			color: #ffffff;

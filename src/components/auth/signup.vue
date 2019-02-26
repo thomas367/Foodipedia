@@ -86,11 +86,6 @@
 			border: 1px solid $colorLightGrey;
 		}
 
-		input:focus{
-			outline: none;
-			border: 1px solid $colorLightGrey;
-			background-color: #ffffff;
-		}
 	}
 
 	.input.inline label {
