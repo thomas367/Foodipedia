@@ -1,7 +1,7 @@
 <template>
-		
+	
 </template>
 
 <style>
-
+	
 </style>

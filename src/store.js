@@ -60,7 +60,7 @@ export default new Vuex.Store({
           router.replace('/welcome')
         }
         else if(response.data.success === false){
-          //TODO: Message the user about the error
+          //TODO: Message the user if there are empty fields or username exists.
         }
       })
       .catch(error =>{

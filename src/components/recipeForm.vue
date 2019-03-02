@@ -62,6 +62,7 @@
 								<option value="Vegeterian">Vegeterian</option>
 								<option value="Drinks">Drinks</option>
 								<option value="Desserts">Desserts</option>
+								<option value="Grill">Grill</option>
 								<option value="Baking">Baking</option>
 								<option value="Snacks">Snacks</option>
 								<option value="Appertisers">Appertisers</option>
@@ -95,7 +96,7 @@
 									<div class="space">&nbsp;</div>
 									<div class="quantity">
 										<label :for="ingredient">Quantity</label> 
-										<b-form-input type="text" id="ingredient" v-model="ingredient.quantity" :data-vv-name="'quantity'+index" v-validate="'required'"/>
+										<b-form-input type="text" id="quantity" v-model="ingredient.quantity" :data-vv-name="'quantity'+index" v-validate="'required'"/>
 		              				</div>
 		              				<div class="space">&nbsp;</div>
 		              				<div class="removeBtn">
@@ -108,7 +109,7 @@
 						</div>
 					</div>
 				</div>
-		
+			
 				<div class="row">
 					<div class="submit">
 						<b-button type="submit" :disabled="errors.any() || !isComplete">Submit</b-button>
@@ -137,7 +138,7 @@
 		},
 		computed: {
 			isComplete(){
-				return this.recipe_name && this.cuisine && this.category && this.directions && this.image && this.ingredients
+				return this.recipe_name && this.cuisine && this.category && this.directions && this.image && this.ingredients[0]
 			}
 		},
 		methods: {
@@ -152,7 +153,6 @@
 		    onDeleteIngredient (index) {
 		        this.ingredients.splice(index, 1)
 		    },
-		
 			/* Get image from input and preview action */
 			onImageSelect(event){
 				this.image = event.target.files[0];
@@ -161,30 +161,30 @@
 			
 		    /* Submit recipe action */
 			onSubmit(){
-				const formData = {
-					recipe_name: this.recipe_name,
-					cuisine: this.cuisine,
-					category: this.category,
-					directions: this.directions,
-					image: this.image,
-					ingredient: this.ingredients.map(ingredient => ingredient.ingredient),
-					quantity: this.ingredients.map(ingredient => ingredient.quantity)
-				}
-				console.log(formData);
-			/*	
+				const formData = new FormData();
+				formData.append('recipe_name', this.recipe_name);
+				formData.append('cuisine', this.cuisine);
+				formData.append('category', this.category);
+				formData.append('directions', this.directions);
+				formData.append('image', this.image);
+				formData.append('ingredient', this.ingredients.map(ingredient => ingredient.ingredient));
+				formData.append('quantity', this.ingredients.map(ingredient => ingredient.quantity));
+				
 				const token = localStorage.getItem('token');
 				axios.post('http://localhost:8000/api/storeRecipe',formData,{
 					headers: {
-						'Authorization': 'Bearer' + token
+						'Authorization': 'Bearer' + token,
+						'Content-Type': 'multipart/form-data'
 					}
 				})
 				.then(response =>{
 					console.log(response);
+
 				})
 				.catch(error =>{
 					console.log(error.response);
+					
 				})
-			*/	
 			}
 		}
 	}

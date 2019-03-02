@@ -6,7 +6,8 @@ import WelcomePage from './components/welcome.vue'
 import SigninPage from './components/auth/signin.vue'
 import SignupPage from './components/auth/signup.vue'
 import MyRecipesPage from './components/myRecipes.vue'
-import recipeFormPage from './components/recipeForm.vue'
+import RecipeFormPage from './components/recipeForm.vue'
+import ShowRecipe from './components/showRecipe.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,10 @@ export default new Router({
       component: SignupPage
     },
     {
+      path: '/showRecipe',
+      component: ShowRecipe
+    },
+    {
       path: '/myRecipes',
       component: MyRecipesPage,
       beforeEnter(to, from, next){
@@ -40,14 +45,14 @@ export default new Router({
     },
     {
       path: '/recipeForm',
-      component: recipeFormPage
+      component: RecipeFormPage
       /*
       beforeEnter(to, from, next){
         if(store.state.idToken){
           next()
         }
         else{
-          next('signin')
+          next('/signin')
         }
       }
       */

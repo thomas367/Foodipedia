@@ -4,13 +4,13 @@
 			<b-form @submit.prevent="onSubmit">
 				<div class="input" :class="{invalid: errors.has('username')}">
 					<label for="username">Username</label>
-					<b-form-input type="text" id="username" v-model="username" data-vv-name="username" v-validate="'required'"/>
+					<b-form-input type="text" id="username" v-model="username"  v-validate="'required'"/>
 					<span class="formErrorsMessages"><br/>{{ errors.first('username') }}</span>
 				</div>
 				
 				<div class="input" :class="{invalid: errors.has('password')}">
 					<label for="password">Password</label>
-					<b-form-input type="password" id="password" v-model="password" data-vv-name="password" v-validate="'required'"/>
+					<b-form-input type="password" id="password" v-model="password"  v-validate="'required'"/>
 					<span class="formErrorsMessages"><br/>{{ errors.first('password') }}</span>
 				</div>
 				<div class="submit">

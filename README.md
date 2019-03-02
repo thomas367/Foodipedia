@@ -1,4 +1,4 @@
-# foodipedia
+# Foodipedia
 
 ## Project setup
 ```
