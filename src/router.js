@@ -33,7 +33,7 @@ export default new Router({
     },
     {
       path: '/myRecipes',
-      component: MyRecipesPage,
+      component: MyRecipesPage,  
       beforeEnter(to, from, next){
         if(store.state.idToken){
           next()

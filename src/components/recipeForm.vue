@@ -179,12 +179,13 @@
 				})
 				.then(response =>{
 					console.log(response);
-
+					// TODO: success message and redirection.
 				})
 				.catch(error =>{
 					console.log(error.response);
-					
+					// message about the error
 				})
+				
 			}
 		}
 	}

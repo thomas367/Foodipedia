@@ -3,7 +3,32 @@
 </template>
 
 <script>
-	
+	import axios from 'axios'
+	import store from '@/store'
+
+	export default {
+		beforeMount() {
+			this.getRecipes()
+		},
+		methods: {
+			getRecipes(){
+				const token = localStorage.getItem('token');
+				axios.get('http://localhost:8000/api/myRecipes',{
+					headers:{
+						'Authorization': 'Bearer' + token
+					}
+				})
+				.then(response =>{
+					console.log(response);
+				})
+				.catch(error =>{
+					if(error.response.status === 401){
+						console.log('You are an unauthorized user.')
+					}
+				});
+			}
+		}	
+	}
 </script>
 
 <style scoped lang="scss">
