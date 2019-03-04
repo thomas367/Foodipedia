@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import VeeValidate from 'vee-validate'
 import BootstrapVue from 'bootstrap-vue'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:8000/api'
 
 Vue.use(VeeValidate)
 Vue.use(BootstrapVue)

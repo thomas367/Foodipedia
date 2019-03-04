@@ -21,7 +21,7 @@ export default new Vuex.Store({
   actions: {
   	/*** Login Action ***/ 
   	login({commit}, authData){
-  		axios.post('http://localhost:8000/api/login',{
+  		axios.post('/login',{
   			username: authData.username,
   			password: authData.password
   		})
@@ -45,7 +45,7 @@ export default new Vuex.Store({
   	},
   	/*** Register Action ***/
   	signup({commit}, authData){
-      axios.post('http://localhost:8000/api/register', {
+      axios.post('/register', {
         username: authData.username,
         password: authData.password,
         password_confirmation :authData.password_confirmation

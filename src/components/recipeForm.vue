@@ -2,8 +2,7 @@
 	<div id="recipeform">
 		<div class="recipe-form">
 			<b-form @submit.prevent="onSubmit">
-				<!-- Image section -->
-				
+				<!-- Image section -->	
 				<div class="row">
 					<div class="image">
 						<div class="input" :class="{invalid: errors.has('image')}">
@@ -16,7 +15,6 @@
 						</div>
 					</div>
 				</div>
-
 				<!-- Recipe name section -->
 				<div class="row">
 					<div class="recipeName">
@@ -81,8 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- Ingredients section -->				
-				
+				<!-- Ingredients section -->					
 				<div class="row">
 					<div class="ingredients">
 						<b-button type="button" size="sm" @click="onAddIngredient">Add ingredients</b-button> 
@@ -108,8 +105,7 @@
 	              			</div> 
 						</div>
 					</div>
-				</div>
-			
+				</div>		
 				<div class="row">
 					<div class="submit">
 						<b-button type="submit" :disabled="errors.any() || !isComplete">Submit</b-button>
@@ -158,7 +154,6 @@
 				this.image = event.target.files[0];
 				this.url = URL.createObjectURL(this.image);
 			},
-			
 		    /* Submit recipe action */
 			onSubmit(){
 				const formData = new FormData();
@@ -169,9 +164,9 @@
 				formData.append('image', this.image);
 				formData.append('ingredient', this.ingredients.map(ingredient => ingredient.ingredient));
 				formData.append('quantity', this.ingredients.map(ingredient => ingredient.quantity));
-				
+			
 				const token = localStorage.getItem('token');
-				axios.post('http://localhost:8000/api/storeRecipe',formData,{
+				axios.post('/storeRecipe',formData,{
 					headers: {
 						'Authorization': 'Bearer' + token,
 						'Content-Type': 'multipart/form-data'
@@ -184,8 +179,7 @@
 				.catch(error =>{
 					console.log(error.response);
 					// message about the error
-				})
-				
+				})	
 			}
 		}
 	}
