@@ -178,7 +178,7 @@
 				})
 				.catch(error =>{
 					console.log(error.response);
-					// message about the error
+					// Message about the error.
 				})	
 			}
 		}

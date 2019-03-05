@@ -1,14 +1,17 @@
 <template>
 	<b-container>
 		<div class="recipe" v-for="recipe in recipes">
-			<div class="recipe_card col-4" @click="showRecipe(recipe.recipe_id)">
+			<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
+				<!-- Image section -->
 				<div class="image">
 					<b-img :src="recipe.img_path" height="300" width="300"/>
 				</div>
+				<!-- Recipe name section -->
 				<div class="recipeName">
 					<label for="recipe_name">Recipe</label>
 					<p>{{recipe.recipe_name}}</p>
 				</div>
+				<!-- Tags section -->
 				<div class="tags row">
 					<div class="cuisine">
 						<label for="cuisine">Cuisine</label>
@@ -36,14 +39,19 @@
 		created() {
 			this.getRecipes()
 		},
-		methods: {
-		/*	
-			// transfer to showRecipe component 
-			   and show recipe data with specific id.
-			showRecipe(id){
-				return '/showRecipe/'+id
+		methods: {	
+			/* Route to showRecipe component with 
+			 * a specific id.
+			 */
+			showRecipe(recipeId){
+				this.$router.push({
+					name: 'showRecipe',
+					params: {
+						id: recipeId
+					}
+				})
 			},
-		*/
+			/* Get recipes */
 			getRecipes(){
 				axios.get('/recipes')
 				.then(response =>{
@@ -52,6 +60,7 @@
 				})
 				.catch(error =>{
 					console.log(error.response);
+					//Message about the error.
 				});
 			}
 		}	
@@ -61,12 +70,12 @@
 <style scoped lang="scss">
 	.recipe_card{
 		margin: 6px;
-		padding: 4px;
+		padding: 5px;
 		border: 1px solid #cccccc;
+		width: 310px; 
 
 		.image{
 			text-align: center;
-
 		}
 		
 		.recipeName{

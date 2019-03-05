@@ -29,6 +29,7 @@ export default new Router({
     },
     {
       path: '/showRecipe/:id',
+      name: 'showRecipe',
       component: ShowRecipe
     },
     {

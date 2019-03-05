@@ -1,14 +1,17 @@
 <template>
 	<b-container>
 		<div class="recipe" v-for="recipe in recipes">
-			<div class="recipe_card col-4" @click="showRecipe(recipe.recipe_id)">
+			<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
+				<!-- Image section -->
 				<div class="image">
 					<b-img :src="recipe.img_path" height="300" width="300"/>
 				</div>
+				<!-- Recipe name section -->
 				<div class="recipeName">
 					<label for="recipe_name">Recipe</label>
 					<p>{{recipe.recipe_name}}</p>
 				</div>
+				<!-- Tags section -->
 				<div class="row">
 					<div class="cuisine">
 						<label for="cuisine">Cuisine</label>
@@ -39,13 +42,18 @@
 			this.getRecipes()
 		},
 		methods: {
-		/*	
-			// transfer to showRecipe component 
-			   and show recipe data with specific id.
-			showRecipe(id){
-				return '/showRecipe/'+id
+			/* Route to showRecipe component with 
+			 * a specific id.
+			 */
+			showRecipe(recipeId){
+				this.$router.push({
+					name: 'showRecipe',
+					params: {
+						id: recipeId
+					}
+				})
 			},
-		*/
+			/* Get recipes of the connected user */
 			getRecipes(){
 				const token = localStorage.getItem('token');
 				axios.get('/myRecipes', {
@@ -54,12 +62,12 @@
 					}
 				})
 				.then(response =>{
-					//console.log(response);
 					this.recipes = response.data;
 				})
 				.catch(error =>{
 					if(error.response.status === 401){
-						console.log('You are an unauthorized user.')
+						console.log('You are an unauthorized user.');
+						// Message about the error.
 					}
 				});
 			}
@@ -72,12 +80,14 @@
 
 	.recipe_card{
 		margin: 6px;
-		padding: 4px;
+		padding: 5px;
 		border: 1px solid #cccccc;
-
+		width: 310px;
+		
 		.image{
 			text-align: center;
-
+			height: 300px;
+			width: 300px;
 		}
 		
 		.recipeName{
