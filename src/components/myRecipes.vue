@@ -67,7 +67,10 @@
 				.catch(error =>{
 					if(error.response.status === 401){
 						console.log('You are an unauthorized user.');
-						// Message about the error.
+						/*
+						 * 1. Sweetalert message "You are an unauthorized user.".
+						 * 2. Redirection to login page.
+						 */
 					}
 				});
 			}
@@ -76,12 +79,13 @@
 </script>
 
 <style scoped lang="scss">
-	@import "../styles.scss"; 
+
+@import "../styles.scss"; 
 
 	.recipe_card{
 		margin: 6px;
 		padding: 5px;
-		border: 1px solid #cccccc;
+		border: 1px solid $borderLine;
 		width: 310px;
 		
 		.image{

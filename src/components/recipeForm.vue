@@ -174,11 +174,27 @@
 				})
 				.then(response =>{
 					console.log(response);
-					// TODO: success message and redirection.
+					if(response.data.success === true){
+						/* 
+						 * 1. Toastr message about the successful submit.
+						 * 2. Redirect to myRecipes component.
+						 */
+					}
+					else if(response.data.success === false){
+						/* 
+						 * 1. Toastr message to submit the form correctly.
+						 * 
+						 */
+					}
 				})
 				.catch(error =>{
 					console.log(error.response);
-					// Message about the error.
+					if(error.response.status === 500){
+						/* 
+						 * 1. Message the user something wrong happened
+						 * 2. Redirect to myRecipes component.
+						 */
+					}
 				})	
 			}
 		}
@@ -192,9 +208,9 @@
 	.recipe-form{
 		width: 500px;
 		margin: 30px auto;
-		border: 1px solid #cccccc;
+		border: 1px solid $borderLine;
 		padding: 20px;
-		box-shadow: 0, 2px, 3px #cccccc;
+		box-shadow: 0, 2px, 3px $borderLine;
 	}
 
 	.image, .recipeName, .cuisine, .description, .ingredients, .ingredients-list, .submit{
@@ -240,14 +256,13 @@
 		}
 	
 		.input select {
-		   border: 1px solid #cccccc;
+		   border: 1px solid $borderLine;
 		   font: inherit;
 		}
 
 		#preview {
 		  	display: flex;
 		  	justify-content: left;
-		  	//align-items: center;
 		}
 	}
 
@@ -273,7 +288,7 @@
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{
-			border: 1px solid #cccccc;
+			border: 1px solid $borderLine;
 			background-color: transparent;
 			color: #cccccc;
 			cursor: not-allowed;

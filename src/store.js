@@ -19,59 +19,19 @@ export default new Vuex.Store({
   	}
   },
   actions: {
-  	/*** Login Action ***/ 
-  	login({commit}, authData){
-  		axios.post('/login',{
-  			username: authData.username,
-  			password: authData.password
-  		})
-  		.then(response => {
-  			console.log(response);
-        if(response.data.success === true){
-          commit('authUser', {
-            token: response.data.token
-          })
-          localStorage.setItem('token', response.data.token);
-          router.replace('/welcome')
-        }
-        else if(response.data.success === false){
-          //TODO: Message the user there are empty fields
-
-        }
-  		})
-      .catch(error => {
-        console.log(error.response);
-      });
-  	},
-  	/*** Register Action ***/
-  	signup({commit}, authData){
-      axios.post('/register', {
-        username: authData.username,
-        password: authData.password,
-        password_confirmation :authData.password_confirmation
+    /* Set user state on successful login or register */
+    setUserState({commit}, token){
+      commit('authUser', {
+        token: token
       })
-      .then(response =>{
-        console.log(response);
-        if(response.data.success === true){
-            commit('authUser', {
-            token: response.data.token
-          })
-          localStorage.setItem('token', response.data.token);
-          router.replace('/welcome')
-        }
-        else if(response.data.success === false){
-          //TODO: Message the user if there are empty fields or username exists.
-        }
-      })
-      .catch(error =>{
-        console.log(error.response);
-      });
-  	},
+      localStorage.setItem('token', token);
+      router.replace('/')
+    },
   	/*** Logout Action ***/
   	logout({commit}){
   		commit('clearAuthData')
       localStorage.removeItem('token')
-      router.replace('/welcome')
+      router.replace('/')
   	},
   	/*** On refresh page keeps the user connected ***/
   	keepLogin({commit}){

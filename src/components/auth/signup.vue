@@ -29,6 +29,7 @@
 </template>
 
 <script>
+	import axios from 'axios'
 	
 	export default{
 		data(){
@@ -50,7 +51,23 @@
 					password: this.password,
 					password_confirmation: this.password_confirmation
 				}
-				this.$store.dispatch('signup', {username: formData.username, password: formData.password, password_confirmation: formData.password_confirmation})
+				axios.post('/register', formData)
+			  	.then(response => {
+			        if(response.data.success === true){
+			        	const token = response.data.token
+			        	this.$store.dispatch('setUserState', token)
+			        }
+			        else if(response.data.success === false){
+			          /* 
+			           * 1. Toastr message to submit the form correctly.
+			           *                 OR
+			           * 2. 2. Toastr message username exists.
+			           */
+			        }
+			  	})
+			    .catch(error => {
+			        console.log(error.response);
+			    });
 			}	
 		}
 	}
@@ -64,9 +81,9 @@
 	.signup-form {
 	    width: 400px;
 	    margin: 30px auto;
-	    border: 1px solid #cccccc;
+	    border: 1px solid $borderLine;
 	    padding: 20px;
-	    box-shadow: 0 2px 3px #cccccc;
+	    box-shadow: 0 2px 3px $borderLine;
 	  }
 
 	.input{
@@ -114,7 +131,7 @@
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{
-			border: 1px solid #cccccc;
+			border: 1px solid $borderLine;
 			background-color: transparent;
 			color: #cccccc;
 			cursor: not-allowed;

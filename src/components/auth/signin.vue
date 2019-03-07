@@ -22,7 +22,8 @@
 </template>
 
 <script>
-
+	import axios from 'axios'
+	
 	export default{
 		data(){
 			return {
@@ -42,7 +43,28 @@
 					username: this.username,
 					password: this.password
 				}
-				this.$store.dispatch('login', {username: formData.username, password: formData.password})
+			  	axios.post('/login', formData)
+			  	.then(response => {
+			        if(response.data.success === true){
+			        	const token = response.data.token
+			        	this.$store.dispatch('setUserState', token)
+			        }
+			        else if(response.data.success === false){
+			          /* 
+			           * 1. Toastr message to submit the form correctly.
+			           * 
+			           */
+			        }
+			  	})
+			    .catch(error => {
+			        console.log(error.response);
+			        if(error.response.status === 404){
+
+			        }
+			        else if(error.response.status === 500){
+
+			        }
+			    });
 			}
 		}
 	}
@@ -56,7 +78,7 @@
 	.signin-form{
 		width: 400px;
 		margin: 30px auto;
-		border: 1px solid #cccccc;
+		border: 1px solid $borderLine;
 		padding: 20px;
 		box-shadow: 0, 2px, 3px #cccccc;
 
@@ -99,7 +121,7 @@
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{
-			border: 1px solid #cccccc;
+			border: 1px solid $borderLine;
 			background-color: transparent;
 			color: #cccccc;
 			cursor: not-allowed;

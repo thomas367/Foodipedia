@@ -1,7 +1,7 @@
 <template>
 	<b-container>
 		<div class="recipe" v-for="recipe in recipes">
-			<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
+			<div class="recipe_card col-4" @click="showRecipe(recipe.recipe_id)">
 				<!-- Image section -->
 				<div class="image">
 					<b-img :src="recipe.img_path" height="300" width="300"/>
@@ -55,12 +55,11 @@
 			getRecipes(){
 				axios.get('/recipes')
 				.then(response =>{
-					//console.log(response.data);
 					this.recipes = response.data;
 				})
 				.catch(error =>{
 					console.log(error.response);
-					//Message about the error.
+				
 				});
 			}
 		}	
@@ -68,10 +67,13 @@
 </script>
 
 <style scoped lang="scss">
+
+@import "../styles.scss";
+
 	.recipe_card{
 		margin: 6px;
 		padding: 5px;
-		border: 1px solid #cccccc;
+		border: 1px solid $borderLine;
 		width: 310px; 
 
 		.image{

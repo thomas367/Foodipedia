@@ -67,7 +67,10 @@
 				})
 				.catch(error =>{
 					console.log(error.response);
-					// Message about the error.
+					/*
+					 * 1. Sweetalert message recipe don't exist.
+					 * 2. Redirection to welcome page.
+					 */
 				});
 			}
 		}
