@@ -2,22 +2,25 @@
 	<div id="signup">
 		<div class="signup-form">
 			<b-form @submit.prevent="onSubmit">    
-		        <div class="input" :class="{invalid: errors.has('username')}">
+		        <div class="input" :class="{invalid: errors.has('username') || validatedErrors.username}">
 		          	<label for="username">Username</label>
 		          	<b-form-input type="text" id="username" v-model="username" data-vv-name="username" v-validate="'required|min:6'"/>
 		          	<span class="formErrorsMessages"><br/>{{ errors.first('username') }}</span>
+		          	<span v-if="validatedErrors.username" class="formErrorsMessages">{{validatedErrors.username[0]}}</span>
 		        </div>
 
-		        <div class="input" :class="{invalid: errors.has('password')}">
+		        <div class="input" :class="{invalid: errors.has('password') || validatedErrors.password}">
 		          	<label for="password">Password</label>
 		          	<b-form-input type="password" id="password" v-model="password" data-vv-name="password" v-validate="'required|min:6'" ref="password"/>
 		          	<span class="formErrorsMessages"><br/>{{ errors.first('password') }}</span>
+		          	<span v-if="validatedErrors.password" class="formErrorsMessages">{{validatedErrors.password[0]}}</span>
 		        </div>
         
-		        <div class="input" :class="{invalid: errors.has('confirm password')}">
+		        <div class="input" :class="{invalid: errors.has('confirm password') || validatedErrors.password_confirmation}">
 		          	<label for="confirm-password">Confirm Password</label>
 		          	<b-form-input type="password" id="confirm-password" v-model="password_confirmation" data-vv-name="confirm password" v-validate="'required|confirmed:password'"/>
 		          	<span class="formErrorsMessages"><br/>{{ errors.first('confirm password') }}</span>
+		          	<span v-if="validatedErrors.password_confirmation" class="formErrorsMessages">{{validatedErrors.password_confirmation[0]}}</span>
 		        </div>
 		        
 		        <div class="submit">
@@ -36,7 +39,8 @@
 			return{
 				username: '',
 				password: '',
-				password_confirmation: ''
+				password_confirmation: '',
+				validatedErrors: []
 			}
 		},
 		computed: {
@@ -58,11 +62,7 @@
 			        	this.$store.dispatch('setUserState', token)
 			        }
 			        else if(response.data.success === false){
-			          /* 
-			           * 1. Toastr message to submit the form correctly.
-			           *                 OR
-			           * 2. 2. Toastr message username exists.
-			           */
+			        	this.validatedErrors = response.data.error
 			        }
 			  	})
 			    .catch(error => {

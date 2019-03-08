@@ -46,7 +46,7 @@ export default new Router({
     },
     {
       path: '/recipeForm',
-      component: RecipeFormPage,
+      component: RecipeFormPage,  
       beforeEnter(to, from, next){
         if(store.state.idToken){
           next()

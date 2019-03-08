@@ -19,7 +19,17 @@ export default new Vuex.Store({
   	}
   },
   actions: {
-    /* Set user state on successful login or register */
+    /*** On refresh page keeps the user connected ***/
+    keepLogin({commit}){
+      const token = localStorage.getItem('token')
+      if(!token){
+        return
+      } 
+      commit('authUser', {
+        token: token
+      })
+    },
+    /*** Set user state on successful login or register ***/
     setUserState({commit}, token){
       commit('authUser', {
         token: token
@@ -32,16 +42,6 @@ export default new Vuex.Store({
   		commit('clearAuthData')
       localStorage.removeItem('token')
       router.replace('/')
-  	},
-  	/*** On refresh page keeps the user connected ***/
-  	keepLogin({commit}){
-      const token = localStorage.getItem('token')
-      if(!token){
-        return
-      }
-      commit('authUser', {
-        token: token
-      })
   	}
   },
   getters: {

@@ -45,6 +45,7 @@
 
 <script>
 	import axios from 'axios'
+	import router from '@/router'
 
 	export default {
 		props: ['$route.params.id'],
@@ -67,10 +68,16 @@
 				})
 				.catch(error =>{
 					console.log(error.response);
-					/*
-					 * 1. Sweetalert message recipe don't exist.
-					 * 2. Redirection to welcome page.
-					 */
+					if(error.response.status === 404){
+						this.$swal.fire({
+							text: "This recipe don't exists.",
+							type: 'error',
+							confirmButtonColor: '#3085d6',
+							confirmButtonText: 'OK!'
+							}).then((result) => {
+							router.replace('/')
+						})
+					}
 				});
 			}
 		}

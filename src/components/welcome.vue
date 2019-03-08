@@ -30,18 +30,20 @@
 <script>
 	import axios from 'axios'
 
+	import store from '@/store'
+
 	export default {
 		data(){
 			return {
-				recipes: []
+				recipes: []	
 			}
 		},
 		created() {
 			this.getRecipes()
 		},
 		methods: {	
-			/* Route to showRecipe component with 
-			 * a specific id.
+			/* Route to showRecipe component 
+			 * with a specific id.
 			 */
 			showRecipe(recipeId){
 				this.$router.push({
@@ -59,7 +61,6 @@
 				})
 				.catch(error =>{
 					console.log(error.response);
-				
 				});
 			}
 		}	

@@ -63,15 +63,6 @@
 				})
 				.then(response =>{
 					this.recipes = response.data;
-				})
-				.catch(error =>{
-					if(error.response.status === 401){
-						console.log('You are an unauthorized user.');
-						/*
-						 * 1. Sweetalert message "You are an unauthorized user.".
-						 * 2. Redirection to login page.
-						 */
-					}
 				});
 			}
 		}	
