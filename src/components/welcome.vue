@@ -1,7 +1,7 @@
 <template>
-	<b-container>
-		<div class="recipe" v-for="recipe in recipes">
-			<div class="recipe_card col-4" @click="showRecipe(recipe.recipe_id)">
+	<div class="row">
+		<div class="recipe clearfix" v-for="recipe in recipes">
+			<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
 				<!-- Image section -->
 				<div class="image">
 					<b-img :src="recipe.img_path" height="300" width="300"/>
@@ -24,13 +24,11 @@
 				</div>			
  			</div>
 		</div>
-	</b-container>
+	</div>
 </template>
 
 <script>
 	import axios from 'axios'
-
-	import store from '@/store'
 
 	export default {
 		data(){
@@ -70,20 +68,24 @@
 <style scoped lang="scss">
 
 @import "../styles.scss";
+	.recipe{
+		margin-top: 2rem;
+        margin-bottom: 1rem;
+        margin-left: 3rem;
+	}
 
 	.recipe_card{
 		margin: 6px;
 		padding: 5px;
 		border: 1px solid $borderLine;
-		width: 310px; 
-
+		width: 310px;
+		
 		.image{
 			text-align: center;
 		}
 		
 		.recipeName{
 			text-align: center;
-
 		}
 
 		label{
@@ -92,27 +94,31 @@
 
 		.tags{
 			text-align: center;
-
+			
 			.cuisine{
+				position: relative;
+				left: 10%;
+
 				p{
-					background-color: red;
+					background-color: blue;
 					border-radius: 10px;
 					padding: 3px, 6px, 3px, 6px;
 					color: white;
+					
 				}
 			}
 
 			.category{
+				position: relative;
+				left: 50%;
 				p{
 					background-color: green;
 					border-radius: 10px;
 					padding: 3px, 6px, 3px, 6px;
 					color: white;
+					
 				}
 			}
 		}
-
 	}
-
-
 </style>

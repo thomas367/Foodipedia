@@ -1,36 +1,37 @@
 <template>
-	<b-container>
-		<div class="recipe" v-for="recipe in recipes">
-			<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
-				<!-- Image section -->
-				<div class="image">
-					<b-img :src="recipe.img_path" height="300" width="300"/>
-				</div>
-				<!-- Recipe name section -->
-				<div class="recipeName">
-					<label for="recipe_name">Recipe</label>
-					<p>{{recipe.recipe_name}}</p>
-				</div>
-				<!-- Tags section -->
-				<div class="row">
-					<div class="cuisine">
-						<label for="cuisine">Cuisine</label>
-						<p>{{recipe.cuisine}}</p>
+	<div class="wrapper">
+		<div class="row">	
+			<div class="recipe clearfix" v-for="recipe in recipes">
+				<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
+					<!-- Image section -->
+					<div class="image">
+						<b-img :src="recipe.img_path" height="300" width="300"/>
 					</div>
-					<div class="category">
-						<label for="category">Category</label>
-						<p>{{recipe.category}}</p>
+					<!-- Recipe name section -->
+					<div class="recipeName">
+						<label for="recipe_name">Recipe</label>
+						<p>{{recipe.recipe_name}}</p>
 					</div>
-				</div>			
- 			</div>
-		</div>
+					<!-- Tags section -->
+					<div class="tags row">
+						<div class="cuisine">
+							<label for="cuisine">Cuisine</label>
+							<p>{{recipe.cuisine}}</p>
+						</div>
+						<div class="category">
+							<label for="category">Category</label>
+							<p>{{recipe.category}}</p>
+						</div>
+					</div>			
+	 			</div>
+			</div>
+		</div>	
 		<router-link to="/recipeForm" tag="button">Add recipe</router-link>
-	</b-container>
+	</div>	
 </template>
 
 <script>
 	import axios from 'axios'
-	import store from '@/store'
 
 	export default {
 		data(){
@@ -72,6 +73,12 @@
 <style scoped lang="scss">
 
 @import "../styles.scss"; 
+	
+	.recipe{
+		margin-top: 2rem;
+        margin-bottom: 1rem;
+        margin-left: 3rem;
+	}
 
 	.recipe_card{
 		margin: 6px;
@@ -81,13 +88,10 @@
 		
 		.image{
 			text-align: center;
-			height: 300px;
-			width: 300px;
 		}
 		
 		.recipeName{
 			text-align: center;
-
 		}
 
 		label{
@@ -98,20 +102,26 @@
 			text-align: center;
 
 			.cuisine{
+				position: relative;
+				left: 10%;
 				p{
 					background-color: red;
 					border-radius: 10px;
 					padding: 3px, 6px, 3px, 6px;
 					color: white;
+
 				}
 			}
 
 			.category{
+				position: relative;
+				left: 50%;
 				p{
 					background-color: green;
 					border-radius: 10px;
 					padding: 3px, 6px, 3px, 6px;
 					color: white;
+
 				}
 			}
 		}

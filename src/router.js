@@ -36,7 +36,7 @@ export default new Router({
       path: '/myRecipes',
       component: MyRecipesPage,  
       beforeEnter(to, from, next){
-        if(store.state.idToken){
+        if(localStorage.getItem('token')){
           next()
         }
         else{
@@ -48,7 +48,7 @@ export default new Router({
       path: '/recipeForm',
       component: RecipeFormPage,  
       beforeEnter(to, from, next){
-        if(store.state.idToken){
+        if(localStorage.getItem('token')){
           next()
         }
         else{

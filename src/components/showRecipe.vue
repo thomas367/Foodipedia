@@ -1,46 +1,44 @@
 <template>
-	<b-container>
-		<div class="recipe_card" v-if="recipe[0]">
-			<!-- Image section -->
-			<div class="image">
-				<b-img :src="recipe[0].img_path" height="300" width="300"/>
+	<div class="recipe_card" v-if="recipe[0]">
+		<!-- Image section -->
+		<div class="image">
+			<b-img :src="recipe[0].img_path" height="300" width="300"/>
+		</div>
+		<!-- Ingredients section -->
+		<div class="ingredients">	
+			<div class="titles row">
+				<label id="ingredient" for="ingredient_name">Ingredient</label>
+				<label id="quantity" for="quantity">Quantity</label>
 			</div>
-				<!-- Ingredients section -->
-			<div class="ingredients">	
-				<div class="titles row">
-					<label for="ingredient_name">Ingredient</label>
-					<label for="quantity">Quantity</label>
-				</div>
-				<div class="ingredients_list" v-for="ingredient in ingredients">
-					<div class="row">
-						<p>{{ingredient.ingredient_name}}</p>
-						<p>{{ingredient.quantity}}</p>
-					</div>
+			<div class="ingredients_list" v-for="ingredient in ingredients">
+				<div class="list row">
+					<p id="ingredient">{{ingredient.ingredient_name}}</p>
+					<p id="quantity">{{ingredient.quantity}}</p>
 				</div>
 			</div>
-			<!-- Recipe name section -->
-			<div class="recipeName">
-				<label for="recipe_name">Recipe</label>
-				<p>{{recipe[0].recipe_name}}</p>
+		</div>
+		<!-- Recipe name section -->
+		<div class="recipeName">
+			<label for="recipe_name">Recipe</label>
+			<p>{{recipe[0].recipe_name}}</p>
+		</div>
+		<!-- Tags section -->
+		<div class="tags row">
+			<div class="cuisine">
+				<label for="cuisine">Cuisine</label>
+				<p>{{recipe[0].cuisine}}</p>
 			</div>
-			<!-- Tags section -->
-			<div class="tags row">
-				<div class="cuisine">
-					<label for="cuisine">Cuisine</label>
-					<p>{{recipe[0].cuisine}}</p>
-				</div>
-				<div class="category">
-					<label for="category">Category</label>
-					<p>{{recipe[0].category}}</p>
-				</div>
+			<div class="category">
+				<label for="category">Category</label>
+				<p>{{recipe[0].category}}</p>
 			</div>
-			<!-- Directions section -->
-			<div class="directions">
-				<label for="directions">Directions</label>
-				<p>{{recipe[0].directions}}</p>
-			</div>			
- 		</div>
-	</b-container>
+		</div>
+		<!-- Directions section -->
+		<div class="directions">
+			<label for="directions">Directions</label>
+			<p>{{recipe[0].directions}}</p>
+		</div>			
+ 	</div>
 </template>
 
 <script>
@@ -84,6 +82,34 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+
+@import "../styles.scss";
+
+	.recipe_card {
+		margin-top: 2rem;
+		text-align: center;
+
+		.titles{
+			margin-top: 1rem;
+			font-weight: bold;
+			justify-content: center;
+
+		}
+
+		.list{
+			justify-content: center;
+		}
+
+		#ingredient{
+			margin-right: 0.5rem;
+			text-align: center;
+		}
+
+		#quantity{
+			margin-left: 0.5 rem;
+			text-align: center;
+		}
+	}
 	
 </style>
