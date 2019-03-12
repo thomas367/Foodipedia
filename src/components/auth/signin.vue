@@ -82,6 +82,14 @@
 		padding: 20px;
 		box-shadow: 0, 2px, 3px #cccccc;
 
+		@include mq-mobile {
+			width: 300px;
+		}
+
+		@include mq-tablet {
+			width: 400px;
+		}
+
 	}
 
 	.input{

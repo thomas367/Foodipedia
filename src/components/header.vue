@@ -1,24 +1,27 @@
 <template>
 	<header class="main-header">	
-		<div class="col-3 logo-name">
+		<div class="logo-name">
 			<router-link to='/'>Foodipedia</router-link>
-		</div>			
-		<nav>
-			<ul>
-				<li v-if="!auth">
-					<router-link to="/signin" tag="button">Sign In</router-link>
-				</li>
-				<li v-if="!auth">
-					<router-link to="/signup" tag="button">Sign Up</router-link>
-				</li>
-				<li v-if="auth">
-					<router-link to="/myRecipes" tag="button">My recipes</router-link>
-				</li>
-				<li v-if="auth">
-					<button @click="onLogout" class="logout">Logout</button>
-				</li>
-			</ul>
-		</nav>
+		</div> 			
+		<b-navbar toggleable="lg" type="dark">  
+			<b-navbar-toggle target="nav_collapse"/>
+			<b-collapse is-nav id="nav_collapse">
+				<b-navbar-nav>
+					<b-nav-item v-if="!auth">
+						<router-link to="/signin" tag="button">Sign In</router-link>
+					</b-nav-item>
+					<b-nav-item v-if="!auth">
+						<router-link to="/signup" tag="button">Sign Up</router-link>
+					</b-nav-item>
+					<b-nav-item v-if="auth">
+						<router-link to="/myRecipes" tag="button">My recipes</router-link>
+					</b-nav-item>
+					<b-nav-item v-if="auth">
+						<button @click="onLogout" class="logout">Logout</button>
+					</b-nav-item>
+				</b-navbar-nav>
+			</b-collapse>
+		</b-navbar>
 	</header>
 </template>
 
@@ -56,6 +59,7 @@
 		color: white;
 		font-size: 32px;
 		font-family: Lato;
+		
 		a{
 			text-decoration: none;	
 			color: white;
@@ -67,7 +71,7 @@
 	}
 
 	
-	nav{
+/*	nav{
 		height: 100%
 	}
 	
@@ -79,7 +83,7 @@
 		display: flex;
 		flex-flow: row;
 		align-items: center;
-	}
+	}  */
 				
 	button{
 		background-color: transparent;

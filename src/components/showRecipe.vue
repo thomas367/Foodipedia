@@ -5,37 +5,41 @@
 			<b-img :src="recipe[0].img_path" height="300" width="300"/>
 		</div>
 		<!-- Ingredients section -->
-		<div class="ingredients">	
-			<div class="titles row">
-				<label id="ingredient" for="ingredient_name">Ingredient</label>
-				<label id="quantity" for="quantity">Quantity</label>
-			</div>
-			<div class="ingredients_list" v-for="ingredient in ingredients">
-				<div class="list row">
-					<p id="ingredient">{{ingredient.ingredient_name}}</p>
-					<p id="quantity">{{ingredient.quantity}}</p>
-				</div>
-			</div>
-		</div>
+		
+			<table class="ingredients table-bordered">
+				<thead>
+					<tr>
+						<th>Ingredient</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="ingredient in ingredients">
+						<td>{{ingredient.ingredient_name}}</td>
+						<td>{{ingredient.quantity}}</td>
+					</tr>
+				</tbody>
+			</table>
+			
 		<!-- Recipe name section -->
 		<div class="recipeName">
-			<label for="recipe_name">Recipe</label>
+			<label class="recipe_name">Recipe</label>
 			<p>{{recipe[0].recipe_name}}</p>
 		</div>
 		<!-- Tags section -->
 		<div class="tags row">
 			<div class="cuisine">
-				<label for="cuisine">Cuisine</label>
+				<label id="cuisineTitle">Cuisine</label>
 				<p>{{recipe[0].cuisine}}</p>
 			</div>
 			<div class="category">
-				<label for="category">Category</label>
+				<label id="categoryTitle">Category</label>
 				<p>{{recipe[0].category}}</p>
 			</div>
 		</div>
 		<!-- Directions section -->
 		<div class="directions">
-			<label for="directions">Directions</label>
+			<label id="directionsTitle">Directions</label>
 			<p>{{recipe[0].directions}}</p>
 		</div>			
  	</div>
@@ -97,18 +101,59 @@
 
 		}
 
-		.list{
+		.ingredients{
+			margin-top: 2rem;
+			margin-left: auto;
+			margin-right: auto;
+			width: 350px;
+
+			@include mq-mobile {
+				width: 280px;
+			}
+
+			@include mq-tablet {
+				width: 350px;
+			}
+		}
+
+		.recipeName{
+			margin-top: 1rem;
+
+			.recipe_name{
+				font-weight: bold;
+			}
+		}
+
+		.tags{
 			justify-content: center;
+			margin-top: 1rem;
+
+			.cuisine{
+				margin-right: 0.5rem;
+
+				#cuisineTitle{
+					font-weight: bold;
+				}
+
+			}
+
+			.category{
+				margin-left: 0.5rem;
+
+				#categoryTitle{
+					font-weight: bold;
+				}
+			}
 		}
 
-		#ingredient{
-			margin-right: 0.5rem;
-			text-align: center;
-		}
+		.directions{
+			margin-top: 1rem;
+			padding-right: 50px;
+			padding-left: 50px;
 
-		#quantity{
-			margin-left: 0.5 rem;
-			text-align: center;
+			#directionsTitle{
+				font-weight: bold;
+			} 
 		}
 	}
 	

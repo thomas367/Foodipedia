@@ -6,9 +6,15 @@ $borderLine: #cccccc;
 
 /*****     MIXINS     *****/
 
+$mobile-width: 320px;
 $tablet-width: 768px;
 $desktop-width: 992px;
-$large-desktop-width: 1200px;
+
+@mixin mq-mobile {
+  @media (min-width: #{$mobile-width}){
+    @content;
+  }
+}
 
 @mixin mq-tablet {
   @media (min-width: #{$tablet-width}) {
@@ -18,12 +24,6 @@ $large-desktop-width: 1200px;
 
 @mixin mq-desktop {
   @media (min-width: #{$desktop-width}) {
-    @content;
-  }
-}
-
-@mixin mq-large-desktop {
-  @media (min-width: #{$large-desktop-width}) {
     @content;
   }
 }

@@ -46,7 +46,6 @@
 							</b-form-select>
 						</div>
 					</div>
-					<div class="space">&nbsp;&nbsp;&nbsp;&nbsp;</div>
 					<div class="category">
 						<div class="input" :class="{invalid: errors.has('category') || validatedErrors.category}">
 							<label for="category">Category</label>
@@ -222,9 +221,17 @@
 		border: 1px solid $borderLine;
 		padding: 20px;
 		box-shadow: 0, 2px, 3px $borderLine;
+
+		@include mq-mobile {
+			width: 300px;
+		}
+
+		@include mq-tablet {
+			width: 500px;
+		}
 	}
 
-	.image, .recipeName, .cuisine, .description, .ingredients, .ingredients-list, .submit{
+	.image, .recipeName, .cuisine, .category, .description, .ingredients, .ingredients-list, .submit{
 		padding-left: 12px;
 	}
 
@@ -247,6 +254,14 @@
 			font: inherit;
 			border-sizing: border-box;
 			border: 1px solid $colorLightGrey;
+
+			@include mq-mobile {
+				width: 250px;
+			}
+
+			@include mq-tablet {
+				width: 400px;
+			}
 		}
 
 		#cuisine, #category {
@@ -264,6 +279,14 @@
 			font: inherit;
 			border-sizing: border-box;
 			border: 1px solid $colorLightGrey;
+
+			@include mq-mobile {
+				width: 250px;
+			}
+
+			@include mq-tablet {
+				width: 400px;
+			}
 		}
 	
 		.input select {

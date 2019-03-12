@@ -2,7 +2,7 @@
   <div id="app">
     <app-header/>
     <router-view></router-view>
-    
+  
   </div>
 </template>
 
@@ -13,7 +13,7 @@
     name: 'app',
     components:{
       'app-header': Header
-     
+      
     },
     created(){
       this.$store.dispatch('keepLogin')
