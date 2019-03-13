@@ -1,17 +1,23 @@
 <template>
-	<header class="main-header">	
-		<div class="logo-name">
-			<router-link to='/'>Foodipedia</router-link>
-		</div> 			
-		<b-navbar toggleable="lg" type="dark">  
+	<header class="main-header">		
+		<b-navbar toggleable="lg" type="dark" class="navbarCollapsed">  
+			<b-navbar-brand class="logo-name">
+				<router-link to='/'>Foodipedia</router-link>  
+			</b-navbar-brand>
 			<b-navbar-toggle target="nav_collapse"/>
 			<b-collapse is-nav id="nav_collapse">
-				<b-navbar-nav>
+				<b-navbar-nav class="ml-auto">
+			        <b-nav-form>
+			          <b-form-input size="md" class="mr-sm-2 searchbar" type="text" placeholder="Search..." />
+			          <b-button size="md" class="my-2 my-sm-0" type="submit">Search</b-button>
+			        </b-nav-form>
+			    </b-navbar-nav>
+				<b-navbar-nav class="ml-auto">
 					<b-nav-item v-if="!auth">
-						<router-link to="/signin" tag="button">Sign In</router-link>
+						<router-link to="/signin" tag="button">Sign In</router-link>  
 					</b-nav-item>
 					<b-nav-item v-if="!auth">
-						<router-link to="/signup" tag="button">Sign Up</router-link>
+						<router-link to="/signup" tag="button">Sign Up</router-link>  
 					</b-nav-item>
 					<b-nav-item v-if="auth">
 						<router-link to="/myRecipes" tag="button">My recipes</router-link>
@@ -36,6 +42,9 @@
 			onLogout(){
 				this.$store.dispatch('logout')
 			}
+			/*
+			 * TODO: Add Search action.
+			 */
 		}
 	}
 </script>
@@ -45,13 +54,8 @@
 @import "../styles.scss";
 
 	.main-header{
-		height: 56px;
-		display: flex;
-		flex-flow: row;
-		justify-content: space-between;
-		align-items: center;
 		background-color: $colorLightBlack;
-		padding: 0 20px;
+		
 	}
 
 	.logo-name{
@@ -70,20 +74,14 @@
 		color: white;
 	}
 
-	
-/*	nav{
-		height: 100%
+	.navbarCollapsed{
+		background-color: $colorLightBlack;
+
 	}
-	
-	ul{
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		height: 100%;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-	}  */
+
+	.searchbar{
+		width: 220px;
+	}
 				
 	button{
 		background-color: transparent;
@@ -92,6 +90,7 @@
 		border: 1px solid #ffffff;
 		text-decoration: none;
 		color: white;
+		border-radius: 10px;
 	}
 
 	button:hover, button:active{

@@ -5,7 +5,6 @@
 			<b-img :src="recipe[0].img_path" height="300" width="300"/>
 		</div>
 		<!-- Ingredients section -->
-		
 			<table class="ingredients table-bordered">
 				<thead>
 					<tr>

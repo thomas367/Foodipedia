@@ -22,6 +22,11 @@
 							<label for="category">Category</label>
 							<p>{{recipe.category}}</p>
 						</div>
+					</div>
+					<!--  -->
+					<div class="icons row">	
+						<span class="icon ion-md-create edit" @click.stop="editRecipe(recipe.recipe_id)"></span>
+						<span class="icon ion-ios-trash delete" @click.stop="deleteRecipe(recipe.recipe_id)"></span>
 					</div>			
 	 			</div>
 			</div>
@@ -52,6 +57,29 @@
 					params: {
 						id: recipeId
 					}
+				})
+			},
+			editRecipe(recipeId){
+				/*
+				this.$router.push({
+					name: 'recipeForm',
+					params: {
+						id: recipeId
+					}
+				})
+				*/
+			},
+			deleteRecipe(recipeId){
+				this.$swal.fire({
+					text: "Are you sure?\n Do you want to delete this recipe?",
+					type: 'warning',
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: 'OK!'
+				}).then((result) => {
+					/* 
+					 * 1. Axios request to delete.
+					 * 2. Fade out deleted recipe.
+					 */
 				})
 			},
 			/* Get recipes of the connected user */
@@ -126,6 +154,23 @@
 			}
 		}
 
+		.icons{
+			text-align: center;
+			font-size: 28px;
+
+			.edit{
+				position: relative;
+				left: 15%;
+				color: $colorLightBlue;
+			}
+
+			.delete{
+				position: relative;
+				left: 70%;
+				color: $colorRed;
+			}
+		}
+
 	}
 
 	button{
@@ -135,6 +180,7 @@
 		border: 1px solid #ffffff;
 		text-decoration: none;
 		color: white;
+		border-radius: 10px;
 	}
 	
 </style>

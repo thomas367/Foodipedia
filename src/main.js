@@ -7,6 +7,8 @@ import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
 import VueSweetalert2 from 'vue-sweetalert2'
 
+import 'ionicons/dist/css/ionicons.min.css'
+
 axios.defaults.baseURL = 'http://localhost:8000/api'
 
 Vue.use(VeeValidate)
