@@ -68,7 +68,6 @@
 					this.ingredients = response.data.ingredients;
 				})
 				.catch(error =>{
-					console.log(error.response);
 					if(error.response.status === 404){
 						this.$swal.fire({
 							text: "This recipe don't exists.",
@@ -149,6 +148,16 @@
 			margin-top: 1rem;
 			padding-right: 50px;
 			padding-left: 50px;
+
+			@include mq-mobile {
+				padding-right: 20px;
+				padding-left: 20px;
+			}
+
+			@include mq-tablet {
+				padding-right: 50px;
+				padding-left: 50px;
+			}			
 
 			#directionsTitle{
 				font-weight: bold;

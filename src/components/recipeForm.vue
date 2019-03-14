@@ -178,7 +178,6 @@
 					}
 				})
 				.then(response =>{
-					console.log(response);
 					if(response.data.success === true){
 						this.$swal.fire({
 						  	text: "Your recipe has been saved.",
@@ -194,7 +193,6 @@
 					}
 				})
 				.catch(error =>{
-					console.log(error.response);
 					if(error.response.status === 500){ 
 						this.$swal.fire({
 						  	text: "Something wrong has happened.\n Please again.",
@@ -328,5 +326,4 @@
 			cursor: not-allowed;
 		}
 	}
-
 </style>

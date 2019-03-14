@@ -4,7 +4,7 @@
 			<b-navbar-brand class="logo-name">
 				<router-link to='/'>Foodipedia</router-link>  
 			</b-navbar-brand>
-			<b-navbar-toggle target="nav_collapse"/>
+			<b-navbar-toggle target="nav_collapse"  class="toggle"/>
 			<b-collapse is-nav id="nav_collapse">
 				<b-navbar-nav class="ml-auto">
 			        <b-nav-form>
@@ -82,7 +82,17 @@
 	.searchbar{
 		width: 220px;
 	}
-				
+	
+	.toggle{
+		color: white;
+		background-color: transparent;
+	}
+
+	.toggle:hover, .toggle:active{
+		color: white;
+		background-color: transparent;
+	}
+
 	button{
 		background-color: transparent;
 		padding: 9px;

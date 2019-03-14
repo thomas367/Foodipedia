@@ -6,11 +6,13 @@ import VeeValidate from 'vee-validate'
 import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
 import VueSweetalert2 from 'vue-sweetalert2'
+import Toasted from 'vue-toasted'
 
 import 'ionicons/dist/css/ionicons.min.css'
 
 axios.defaults.baseURL = 'http://localhost:8000/api'
 
+Vue.use(Toasted)
 Vue.use(VeeValidate)
 Vue.use(VueSweetalert2)
 Vue.use(BootstrapVue)

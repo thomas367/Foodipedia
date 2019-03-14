@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
 		<div class="row">	
-			<div class="recipe clearfix" v-for="recipe in recipes">
+			<div class="recipe clearfix" v-for="(recipe, index) in recipes">
 				<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
 					<!-- Image section -->
 					<div class="image">
@@ -23,11 +23,11 @@
 							<p>{{recipe.category}}</p>
 						</div>
 					</div>
-					<!--  -->
+					<!-- Recipe action icons -->
 					<div class="icons row">	
 						<span class="icon ion-md-create edit" @click.stop="editRecipe(recipe.recipe_id)"></span>
-						<span class="icon ion-ios-trash delete" @click.stop="deleteRecipe(recipe.recipe_id)"></span>
-					</div>			
+						<span class="icon ion-ios-trash delete" @click.stop="deleteRecipe(recipe.recipe_id, index)"></span>
+					</div>
 	 			</div>
 			</div>
 		</div>	
@@ -59,6 +59,7 @@
 					}
 				})
 			},
+			/* Edit recipe */
 			editRecipe(recipeId){
 				/*
 				this.$router.push({
@@ -69,17 +70,53 @@
 				})
 				*/
 			},
-			deleteRecipe(recipeId){
+			/* Delete recipe */
+			deleteRecipe(recipeId, index){
 				this.$swal.fire({
 					text: "Are you sure?\n Do you want to delete this recipe?",
 					type: 'warning',
+					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#ff0000',
 					confirmButtonText: 'OK!'
 				}).then((result) => {
-					/* 
-					 * 1. Axios request to delete.
-					 * 2. Fade out deleted recipe.
-					 */
+					if(result.value){
+						const token = localStorage.getItem('token');
+						axios.post('/deleteRecipes/' + recipeId, null,{
+							headers: {
+								'Authorization': 'Bearer' + token
+							}
+						})
+						.then(response =>{
+							if(response.data.success === true){
+								this.recipes.splice(index, 1)
+								this.$toasted.show('Recipe deleted successfully.',{
+									theme: 'bubble',
+									position: 'bottom-right',
+									duration: 1500,
+									type: 'success'
+								})
+							}
+						})
+						.catch(error =>{
+							if(error.response.status === 400){
+								this.$swal.fire({
+									text: "Error occured!\n Recipe could not found.",
+									type: 'info',	
+									confirmButtonColor: '#3085d6',
+									confirmButtonText: 'OK!'
+								});
+							}
+							else if(error.response.status === 500){
+								this.$swal.fire({
+									text: "Error occured!\n Recipe could not deleted.",
+									type: 'info',	
+									confirmButtonColor: '#3085d6',
+									confirmButtonText: 'OK!'
+								});
+							}
+						});
+					}
 				})
 			},
 			/* Get recipes of the connected user */
@@ -133,7 +170,7 @@
 				position: relative;
 				left: 10%;
 				p{
-					background-color: red;
+					background-color: blue;
 					border-radius: 10px;
 					padding: 3px, 6px, 3px, 6px;
 					color: white;
