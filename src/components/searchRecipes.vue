@@ -1,28 +1,30 @@
 <template>
 	<div class="row">
-		<div class="recipe clearfix" v-for="recipe in recipes">
-			<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
-				<!-- Image section -->
-				<div class="image">
-					<b-img :src="recipe.img_path" height="300" width="300"/>
-				</div>
-				<!-- Recipe name section -->
-				<div class="recipeName">
-					<label for="recipe_name">Recipe</label>
-					<p>{{recipe.recipe_name}}</p>
-				</div>
-				<!-- Tags section -->
-				<div class="tags row">
-					<div class="cuisine">
-						<label for="cuisine">Cuisine</label>
-						<p>{{recipe.cuisine}}</p>
+		<div v-if="recipes.length">
+			<div class="recipe clearfix" v-for="recipe in recipes">
+				<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
+					<!-- Image section -->
+					<div class="image">
+						<b-img :src="recipe.img_path" height="300" width="300"/>
 					</div>
-					<div class="category">
-						<label for="category">Category</label>
-						<p>{{recipe.category}}</p>
+					<!-- Recipe name section -->
+					<div class="recipeName">
+						<label for="recipe_name">Recipe</label>
+						<p>{{recipe.recipe_name}}</p>
 					</div>
-				</div>			
- 			</div>
+					<!-- Tags section -->
+					<div class="tags row">
+						<div class="cuisine">
+							<label for="cuisine">Cuisine</label>
+							<p>{{recipe.cuisine}}</p>
+						</div>
+						<div class="category">
+							<label for="category">Category</label>
+							<p>{{recipe.category}}</p>
+						</div>
+					</div>			
+	 			</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -31,9 +33,11 @@
 	import axios from 'axios'
 
 	export default {
+		props: ['$route.params.keyword'],
 		data(){
 			return {
-				recipes: []	
+				recipes: [],
+				keyword: this.$route.params.keyword	
 			}
 		},
 		created() {
@@ -53,7 +57,7 @@
 			},
 			/* Get recipes */
 			getRecipes(){
-				axios.get('/recipes')
+				axios.get('/searchRecipes/'+this.keyword)
 				.then(response =>{
 					this.recipes = response.data;
 				})

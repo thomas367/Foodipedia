@@ -8,6 +8,7 @@ import SignupPage from './components/auth/signup.vue'
 import MyRecipesPage from './components/myRecipes.vue'
 import RecipeFormPage from './components/recipeForm.vue'
 import ShowRecipe from './components/showRecipe.vue'
+import SearchRecipes from './components/searchRecipes.vue'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/showRecipe/:id',
       name: 'showRecipe',
       component: ShowRecipe
+    },
+    {
+      path: '/searchRecipes/:keyword',
+      name: 'searchRecipes',
+      component: SearchRecipes
     },
     {
       path: '/myRecipes',

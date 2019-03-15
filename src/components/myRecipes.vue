@@ -150,6 +150,7 @@
 		padding: 5px;
 		border: 1px solid $borderLine;
 		width: 310px;
+		font-family: $font;
 		
 		.image{
 			text-align: center;
@@ -218,6 +219,7 @@
 		text-decoration: none;
 		color: white;
 		border-radius: 10px;
+		font-family: $font;
 	}
 	
 </style>

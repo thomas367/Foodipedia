@@ -97,6 +97,7 @@
 
 	.input{
 		margin: 10px auto;
+		font-family: $font;
 
 		label{
 			display: block;
@@ -123,6 +124,7 @@
   	} 
 
 	.submit{
+		font-family: $font;
 			
 		button{
 			border: 1px solid $colorLightGrey;
@@ -131,12 +133,13 @@
 			font: inherit;
 			border-radius: 10px;
 			cursor: pointer;
-			background-color: $colorLightGrey;
+			background-color: $colorLightBlack;
 		}
 
 		button:hover, button:active{
-			background-color: #ffffff;
-			color: $colorLightGrey;
+			background-color: $colorLightGrey;
+			color: $colorLightBlack;
+			border: 1px solid $colorLightBlack;
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{

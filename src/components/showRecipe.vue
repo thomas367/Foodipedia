@@ -91,6 +91,7 @@
 	.recipe_card {
 		margin-top: 2rem;
 		text-align: center;
+		font-family: $font;
 
 		.titles{
 			margin-top: 1rem;

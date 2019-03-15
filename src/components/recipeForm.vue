@@ -21,7 +21,7 @@
 					<div class="recipeName">
 						<div class="input" :class="{invalid: errors.has('recipe name') || validatedErrors.recipe_name}">
 							<label for="recipe_name">Recipe name</label>
-							<b-form-input type="text" id="recipe_name" v-model="recipe_name" data-vv-name="recipe name" v-validate="'required|alpha'"/>
+							<b-form-input type="text" id="recipe_name" v-model="recipe_name" data-vv-name="recipe name" v-validate="'required'"/>
 							<span class="formErrorsMessages"><br/>{{ errors.first('recipe name') }}</span>
 							<span v-if="validatedErrors.recipe_name" class="formErrorsMessages">{{validatedErrors.recipe_name[0]}}</span>
 						</div>
@@ -235,6 +235,7 @@
 
 	.input{
 		margin: 10px auto;
+		font-family: $font;
 
 		label{
 			display: block;
@@ -296,14 +297,16 @@
 		  	display: flex;
 		  	justify-content: left;
 		}
-	}
 
-	.ingredients{
-
+		button{
+			font: inherit;
+		}
 	}
 
 	.submit{
-		margin-top: 20px;	
+		margin-top: 20px;
+		font-family: $font;
+
 		button{
 			border: 1px solid $colorLightGrey;
 			color: #ffffff;
@@ -311,12 +314,13 @@
 			font: inherit;
 			border-radius: 10px;
 			cursor: pointer;
-			background-color: $colorLightGrey;
+			background-color: $colorLightBlack;
 		}
 
 		button:hover, button:active{
-			background-color: #ffffff;
-			color: $colorLightGrey;
+			background-color: $colorLightGrey;
+			color: $colorLightBlack;
+			border: 1px solid $colorLightBlack;
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{

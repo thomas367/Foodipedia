@@ -4,14 +4,14 @@
 			<b-form @submit.prevent="onSubmit">
 				<div class="input" :class="{invalid: errors.has('username') || validatedErrors.username}">
 					<label for="username">Username</label>
-					<b-form-input type="text" id="username" v-model="username"  v-validate="'required'"/>
+					<b-form-input type="text" id="username" v-model="username" data-vv-name="username" v-validate="'required'"/>
 					<span class="formErrorsMessages"><br/>{{ errors.first('username') }}</span>
 					<span v-if="validatedErrors.username" class="formErrorsMessages">{{validatedErrors.username[0]}}</span>
 				</div>
 				
 				<div class="input" :class="{invalid: errors.has('password') || validatedErrors.password}">
 					<label for="password">Password</label>
-					<b-form-input type="password" id="password" v-model="password"  v-validate="'required'"/>
+					<b-form-input type="password" id="password" v-model="password" data-vv-name="password" v-validate="'required'"/>
 					<span class="formErrorsMessages"><br/>{{ errors.first('password') }}</span>
 					<span v-if="validatedErrors.password" class="formErrorsMessages">{{validatedErrors.password[0]}}</span>
 				</div>
@@ -94,6 +94,7 @@
 
 	.input{
 		margin: 10px auto;
+		font-family: $font;
 
 		label{
 			display: block;
@@ -112,6 +113,7 @@
 	}
 	
 	.submit{
+		font-family: $font;
 			
 		button{
 			border: 1px solid $colorLightGrey;
@@ -120,12 +122,13 @@
 			font: inherit;
 			border-radius: 10px;
 			cursor: pointer;
-			background-color: $colorLightGrey;
+			background-color: $colorLightBlack;
 		}
 
 		button:hover, button:active{
-			background-color: #ffffff;
-			color: $colorLightGrey;
+			background-color: $colorLightGrey;
+			color: $colorLightBlack;
+			border: 1px solid $colorLightBlack;
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{
