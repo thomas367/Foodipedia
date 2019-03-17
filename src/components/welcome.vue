@@ -31,7 +31,7 @@
 	import axios from 'axios'
 
 	export default {
-		data(){
+		data: function(){
 			return {
 				recipes: []	
 			}
@@ -43,7 +43,7 @@
 			/* Route to showRecipe component 
 			 * with a specific id.
 			 */
-			showRecipe(recipeId){
+			showRecipe: function(recipeId){
 				this.$router.push({
 					name: 'showRecipe',
 					params: {
@@ -52,7 +52,7 @@
 				})
 			},
 			/* Get recipes */
-			getRecipes(){
+			getRecipes: function(){
 				axios.get('/recipes')
 				.then(response =>{
 					this.recipes = response.data;

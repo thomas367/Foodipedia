@@ -49,10 +49,10 @@
 	import router from '@/router'
 
 	export default {
-		props: ['$route.params.id'],
-		data(){
+		props: ['id'],
+		data: function(){
 			return{
-				recipeId: this.$route.params.id,
+				recipeId: this.id,
 				recipe: [],
 				ingredients: []
 			}
@@ -61,7 +61,7 @@
 			this.getRecipeData()
 		},
 		methods: {
-			getRecipeData(){
+			getRecipeData: function(){
 				axios.get('/showRecipe/'+this.recipeId)
 				.then(response =>{
 					this.recipe = response.data.recipe;

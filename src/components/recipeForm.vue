@@ -101,7 +101,6 @@
 		              				</div>
 		              				<div class="space">&nbsp;</div>
 		              				<div class="removeBtn">
-		              					<div class="space">&nbsp;</div>
 		              					<b-button @click="onDeleteIngredient(index)" type="button" size="sm">X</b-button>
 		              				</div>
 		              			</div>
@@ -125,7 +124,7 @@
 	import router from '@/router'
 
 	export default{
-		data(){
+		data: function(){
 			return{
 				url: null,
 				recipe_name: '',
@@ -138,29 +137,29 @@
 			}
 		},
 		computed: {
-			isComplete(){
+			isComplete: function(){
 				return this.recipe_name && this.cuisine && this.category && this.directions && this.image && this.ingredients[0]
 			}
 		},
 		methods: {
 			/* Add ingredient */
-			onAddIngredient () {
+			onAddIngredient: function() {
 		        this.ingredients.push({
 		        	ingredient: '',
 		        	quantity: ''
 		        })  
 		    },
 		    /* Remove ingredient */
-		    onDeleteIngredient (index) {
+		    onDeleteIngredient: function(index) {
 		        this.ingredients.splice(index, 1)
 		    },
 			/* Get image from input and preview action */
-			onImageSelect(event){
+			onImageSelect: function(event){
 				this.image = event.target.files[0];
 				this.url = URL.createObjectURL(this.image);
 			},
 		    /* Submit recipe action */
-			onSubmit(){
+			onSubmit: function(){
 				const formData = new FormData();
 				formData.append('recipe_name', this.recipe_name);
 				formData.append('cuisine', this.cuisine);
@@ -296,6 +295,10 @@
 		#preview {
 		  	display: flex;
 		  	justify-content: left;
+		}
+
+		.removeBtn{
+			padding-top: 32px;
 		}
 
 		button{

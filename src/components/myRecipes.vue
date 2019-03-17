@@ -39,7 +39,7 @@
 	import axios from 'axios'
 
 	export default {
-		data(){
+		data: function(){
 			return{
 				recipes:[]
 			}
@@ -51,7 +51,7 @@
 			/* Route to showRecipe component with 
 			 * a specific id.
 			 */
-			showRecipe(recipeId){
+			showRecipe: function(recipeId){
 				this.$router.push({
 					name: 'showRecipe',
 					params: {
@@ -60,7 +60,7 @@
 				})
 			},
 			/* Edit recipe */
-			editRecipe(recipeId){
+			editRecipe: function(recipeId){
 				/*
 				this.$router.push({
 					name: 'recipeForm',
@@ -71,7 +71,7 @@
 				*/
 			},
 			/* Delete recipe */
-			deleteRecipe(recipeId, index){
+			deleteRecipe: function(recipeId, index){
 				this.$swal.fire({
 					text: "Are you sure?\n Do you want to delete this recipe?",
 					type: 'warning',
@@ -120,7 +120,7 @@
 				})
 			},
 			/* Get recipes of the connected user */
-			getRecipes(){
+			getRecipes: function(){
 				const token = localStorage.getItem('token');
 				axios.get('/myRecipes', {
 					headers:{

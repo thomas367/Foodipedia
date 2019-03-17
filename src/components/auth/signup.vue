@@ -35,7 +35,7 @@
 	import axios from 'axios'
 	
 	export default{
-		data(){
+		data: function(){
 			return{
 				username: '',
 				password: '',
@@ -44,12 +44,12 @@
 			}
 		},
 		computed: {
-			isComplete(){
+			isComplete: function(){
 				return this.username && this.password && this.password_confirmation
 			}
 		},
 		methods: {
-			onSubmit() {
+			onSubmit: function() {
 				const formData = {
 					username: this.username,
 					password: this.password,

@@ -1,30 +1,28 @@
 <template>
 	<div class="row">
-		<div v-if="recipes.length">
-			<div class="recipe clearfix" v-for="recipe in recipes">
-				<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
-					<!-- Image section -->
-					<div class="image">
-						<b-img :src="recipe.img_path" height="300" width="300"/>
+		<div class="recipe clearfix" v-for="recipe in recipes">
+			<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
+				<!-- Image section -->
+				<div class="image">
+					<b-img :src="recipe.img_path" height="300" width="300"/>
+				</div>
+				<!-- Recipe name section -->
+				<div class="recipeName">
+					<label for="recipe_name">Recipe</label>
+					<p>{{recipe.recipe_name}}</p>
+				</div>
+				<!-- Tags section -->
+				<div class="tags row">
+					<div class="cuisine">
+						<label for="cuisine">Cuisine</label>
+						<p>{{recipe.cuisine}}</p>
 					</div>
-					<!-- Recipe name section -->
-					<div class="recipeName">
-						<label for="recipe_name">Recipe</label>
-						<p>{{recipe.recipe_name}}</p>
+					<div class="category">
+						<label for="category">Category</label>
+						<p>{{recipe.category}}</p>
 					</div>
-					<!-- Tags section -->
-					<div class="tags row">
-						<div class="cuisine">
-							<label for="cuisine">Cuisine</label>
-							<p>{{recipe.cuisine}}</p>
-						</div>
-						<div class="category">
-							<label for="category">Category</label>
-							<p>{{recipe.category}}</p>
-						</div>
-					</div>			
-	 			</div>
-			</div>
+				</div>			
+	 		</div>
 		</div>
 	</div>
 </template>
@@ -33,21 +31,27 @@
 	import axios from 'axios'
 
 	export default {
-		props: ['$route.params.keyword'],
-		data(){
+		props: ['keyword'],
+		data: function(){
 			return {
 				recipes: [],
-				keyword: this.$route.params.keyword	
+				query: this.keyword	
 			}
 		},
+		watch: {
+			keyword(){
+				this.query = this.keyword
+				this.getRecipes(this.query)
+			}	
+		},
 		created() {
-			this.getRecipes()
+			this.getRecipes(this.query)
 		},
 		methods: {	
 			/* Route to showRecipe component 
 			 * with a specific id.
 			 */
-			showRecipe(recipeId){
+			showRecipe: function(recipeId){
 				this.$router.push({
 					name: 'showRecipe',
 					params: {
@@ -56,9 +60,10 @@
 				})
 			},
 			/* Get recipes */
-			getRecipes(){
-				axios.get('/searchRecipes/'+this.keyword)
+			getRecipes: function(query){
+				axios.get('/searchRecipes/'+query)
 				.then(response =>{
+					console.log(response);
 					this.recipes = response.data;
 				})
 				.catch(error =>{

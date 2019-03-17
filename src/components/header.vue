@@ -2,6 +2,7 @@
 	<header class="main-header">		
 		<b-navbar toggleable="lg" type="dark" class="navbarCollapsed">  
 			<b-navbar-brand class="logo-name">
+			<!--	<img src="../assets/favicon.png" alt=""/> -->
 				<router-link to='/'>Foodipedia</router-link>  
 			</b-navbar-brand>
 			<b-navbar-toggle target="nav_collapse"  class="toggle"/>
@@ -58,8 +59,7 @@
 					params: {
 						keyword: this.search
 					}
-				})
-		
+				});
 			}
 		}
 	}
@@ -71,7 +71,8 @@
 
 	.main-header{
 		background-color: $colorLightBlack;
-		
+		height: 76px;
+
 	}
 
 	.logo-name{
@@ -83,7 +84,9 @@
 		a{
 			text-decoration: none;	
 			color: white;
+			
 		}
+
 	}
 
 	.logo-name:hover, .logo-name:active{

@@ -31,11 +31,13 @@ export default new Router({
     {
       path: '/showRecipe/:id',
       name: 'showRecipe',
+      props: true,
       component: ShowRecipe
     },
     {
       path: '/searchRecipes/:keyword',
       name: 'searchRecipes',
+      props: true,
       component: SearchRecipes
     },
     {
