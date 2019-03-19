@@ -93,7 +93,7 @@
 			width: 400px;
 		}
 		
-	  }
+	}
 
 	.input{
 		margin: 10px auto;
@@ -102,7 +102,7 @@
 		label{
 			display: block;
 			margin-bottom: 6px;
-			color: #4e4e4e;
+			color: $colorLightBlack;
 		}
 
 		input{
@@ -110,36 +110,27 @@
 			width: 150px;
 			padding: 6px 12px;
 			border-sizing: border-box;
-			border: 1px solid $colorLightGrey;
+			border: 1px solid $colorLightBlack;
 		}
 
 	}
-
-	.input.inline label {
-    	display: inline;
-  	}
-
-  	.input.inline input {
-    	width: auto;
-  	} 
 
 	.submit{
 		font-family: $font;
 			
 		button{
-			border: 1px solid $colorLightGrey;
-			color: #ffffff;
+			border: 1px solid $colorLightOrange;
+			color: $colorLightOrange;
 			padding: 10px 20px;
-			font: inherit;
 			border-radius: 10px;
 			cursor: pointer;
-			background-color: $colorLightBlack;
+			background-color: $colorPetrol;
 		}
 
 		button:hover, button:active{
-			background-color: $colorLightGrey;
+			background-color: $colorLightCream;
 			color: $colorLightBlack;
-			border: 1px solid $colorLightBlack;
+			border: 1px solid $colorPetrol;
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{

@@ -1,47 +1,49 @@
 <template>
-	<div class="recipe_card" v-if="recipe[0]">
-		<!-- Image section -->
-		<div class="image">
-			<b-img :src="recipe[0].img_path" height="300" width="300"/>
-		</div>
-		<!-- Ingredients section -->
-			<table class="ingredients table-bordered">
-				<thead>
-					<tr>
-						<th>Ingredient</th>
-						<th>Quantity</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="ingredient in ingredients">
-						<td>{{ingredient.ingredient_name}}</td>
-						<td>{{ingredient.quantity}}</td>
-					</tr>
-				</tbody>
-			</table>
-			
-		<!-- Recipe name section -->
-		<div class="recipeName">
-			<label class="recipe_name">Recipe</label>
-			<p>{{recipe[0].recipe_name}}</p>
-		</div>
-		<!-- Tags section -->
-		<div class="tags row">
-			<div class="cuisine">
-				<label id="cuisineTitle">Cuisine</label>
-				<p>{{recipe[0].cuisine}}</p>
+	<div class="container-fluid">
+		<div class="recipe_card" v-if="recipe[0]">
+			<!-- Image section -->
+			<div class="image">
+				<b-img :src="recipe[0].img_path" height="300" width="300"/>
 			</div>
-			<div class="category">
-				<label id="categoryTitle">Category</label>
-				<p>{{recipe[0].category}}</p>
+			<!-- Ingredients section -->
+				<table class="ingredients table-bordered">
+					<thead>
+						<tr>
+							<th>Ingredient</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="ingredient in ingredients">
+							<td>{{ingredient.ingredient_name}}</td>
+							<td>{{ingredient.quantity}}</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			<!-- Recipe name section -->
+			<div class="recipeName">
+				<label class="recipe_name">Recipe</label>
+				<p>{{recipe[0].recipe_name}}</p>
 			</div>
-		</div>
-		<!-- Directions section -->
-		<div class="directions">
-			<label id="directionsTitle">Directions</label>
-			<p>{{recipe[0].directions}}</p>
-		</div>			
- 	</div>
+			<!-- Tags section -->
+			<div class="tags row">
+				<div class="cuisine">
+					<label id="cuisineTitle">Cuisine</label>
+					<p>{{recipe[0].cuisine}}</p>
+				</div>
+				<div class="category">
+					<label id="categoryTitle">Category</label>
+					<p>{{recipe[0].category}}</p>
+				</div>
+			</div>
+			<!-- Directions section -->
+			<div class="directions">
+				<label id="directionsTitle">Directions</label>
+				<p>{{recipe[0].directions}}</p>
+			</div>			
+	 	</div>
+	</div>
 </template>
 
 <script>

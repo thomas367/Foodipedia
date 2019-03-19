@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper">
+	<div class="container-fluid">
 		<div class="row">	
 			<div class="recipe clearfix" v-for="(recipe, index) in recipes">
 				<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
@@ -212,12 +212,12 @@
 	}
 
 	button{
-		background-color: $colorLightBlack;
+		background-color: $colorPetrol;
 		padding: 9px;
 		margin: 0 13px;
-		border: 1px solid #ffffff;
+		border: 1px solid $colorLightOrange;
 		text-decoration: none;
-		color: white;
+		color: $colorLightOrange;
 		border-radius: 10px;
 		font-family: $font;
 	}

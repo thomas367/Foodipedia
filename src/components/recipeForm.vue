@@ -86,7 +86,7 @@
 				<!-- Ingredients section -->					
 				<div class="row">
 					<div class="ingredients">
-						<b-button type="button" size="sm" @click="onAddIngredient">Add ingredients</b-button> 
+						<b-button id="add" type="button" size="sm" @click="onAddIngredient">Add ingredients</b-button> 
 						<div class="ingredients-list">
 							<div class="input" v-for="(ingredient, index) in ingredients" :class="{invalid: errors.has('ingredient'+index) || errors.has('quantity'+index)}">
 								<div class="row">
@@ -101,7 +101,7 @@
 		              				</div>
 		              				<div class="space">&nbsp;</div>
 		              				<div class="removeBtn">
-		              					<b-button @click="onDeleteIngredient(index)" type="button" size="sm">X</b-button>
+		              					<b-button id="remove" @click="onDeleteIngredient(index)" type="button" size="sm">X</b-button>
 		              				</div>
 		              			</div>
 		              			<span class="formErrorsMessages"><br/>{{ errors.first('ingredient') || errors.first('quantity') }}</span>
@@ -239,7 +239,7 @@
 		label{
 			display: block;
 			margin-bottom: 6px;
-			color: #4e4e4e;
+			color: $colorLightBlack;
 		}
 		
 		#image{
@@ -251,7 +251,7 @@
 			padding: 6px 12px;
 			font: inherit;
 			border-sizing: border-box;
-			border: 1px solid $colorLightGrey;
+			border: 1px solid $colorLightBlack;
 
 			@include mq-mobile {
 				width: 250px;
@@ -267,7 +267,7 @@
 			padding: 6px 12px;
 			font: inherit;
 			border-sizing: border-box;
-			border: 1px solid $colorLightGrey;
+			border: 1px solid $colorLightBlack;
 		}
 
 		.textarea {
@@ -276,7 +276,7 @@
 			padding: 6px 12px;
 			font: inherit;
 			border-sizing: border-box;
-			border: 1px solid $colorLightGrey;
+			border: 1px solid $colorLightBlack;
 
 			@include mq-mobile {
 				width: 250px;
@@ -296,34 +296,45 @@
 		  	display: flex;
 		  	justify-content: left;
 		}
+	}
+		
+	.ingredients{
+		font-family: $font;
 
 		.removeBtn{
 			padding-top: 32px;
+
+			#remove{
+				background-color: $colorPetrol;
+				color: $colorLightOrange;
+				font: inherit;
+			}
 		}
 
-		button{
+		#add{
 			font: inherit;
+			background-color: $colorPetrol;
+			color: $colorLightOrange;
 		}
-	}
+	}	
 
 	.submit{
 		margin-top: 20px;
 		font-family: $font;
 
 		button{
-			border: 1px solid $colorLightGrey;
-			color: #ffffff;
+			border: 1px solid $colorLightOrange;
+			color: $colorLightOrange;
 			padding: 10px 20px;
-			font: inherit;
 			border-radius: 10px;
 			cursor: pointer;
-			background-color: $colorLightBlack;
+			background-color: $colorPetrol;
 		}
 
 		button:hover, button:active{
-			background-color: $colorLightGrey;
+			background-color: $colorLightCream;
 			color: $colorLightBlack;
-			border: 1px solid $colorLightBlack;
+			border: 1px solid $colorPetrol;
 		}
 
 		button[disabled], button[disabled]:hover, button[disabled]:active{
