@@ -61,7 +61,7 @@
 			},
 			/* Edit recipe */
 			editRecipe: function(recipeId){
-				/*
+			/*	
 				this.$router.push({
 					name: 'recipeForm',
 					params: {

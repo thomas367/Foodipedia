@@ -184,7 +184,7 @@
 						  	confirmButtonColor: '#3085d6',
 						  	confirmButtonText: 'OK!'
 							}).then((result) => {
-						  	router.replace('/myRecipes')
+						  		router.replace('/myRecipes')
 						})
 					}
 					else if(response.data.success === false){
@@ -199,7 +199,7 @@
 						  	confirmButtonColor: '#3085d6',
 						  	confirmButtonText: 'OK!'
 							}).then((result) => {
-						  	router.replace('/myRecipes')
+						  		router.replace('/myRecipes')
 						})
 					}
 				});	

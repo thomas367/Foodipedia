@@ -1,29 +1,37 @@
 <template>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="recipe clearfix" v-for="recipe in recipes">
-				<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
-					<!-- Image section -->
-					<div class="image">
-						<b-img :src="recipe.img_path" height="300" width="300"/>
-					</div>
-					<!-- Recipe name section -->
-					<div class="recipeName">
-						<label for="recipe_name">Recipe</label>
-						<p>{{recipe.recipe_name}}</p>
-					</div>
-					<!-- Tags section -->
-					<div class="tags row">
-						<div class="cuisine">
-							<label for="cuisine">Cuisine</label>
-							<p>{{recipe.cuisine}}</p>
+			<div v-if="recipes.length > 0">
+				<div class="recipe clearfix" v-for="recipe in recipes">
+					<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
+						<!-- Image section -->
+						<div class="image">
+							<b-img :src="recipe.img_path" height="300" width="300"/>
 						</div>
-						<div class="category">
-							<label for="category">Category</label>
-							<p>{{recipe.category}}</p>
+						<!-- Recipe name section -->
+						<div class="recipeName">
+							<label for="recipe_name">Recipe</label>
+							<p>{{recipe.recipe_name}}</p>
 						</div>
-					</div>			
-		 		</div>
+						<!-- Tags section -->
+						<div class="tags row">
+							<div class="cuisine">
+								<label for="cuisine">Cuisine</label>
+								<p>{{recipe.cuisine}}</p>
+							</div>
+							<div class="category">
+								<label for="category">Category</label>
+								<p>{{recipe.category}}</p>
+							</div>
+						</div>			
+			 		</div>
+				</div>
+			</div>
+			<div v-else-if="recipes === -1">
+				<div class="message">
+					<p>There isn't any recipe with this word.</p>
+					<p>Please check if you typed the word correctly or try with another one.</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -65,11 +73,26 @@
 			getRecipes: function(query){
 				axios.get('/searchRecipes/'+query)
 				.then(response =>{
-					console.log(response);
-					this.recipes = response.data;
+					const result = response.data.length;
+					if(result > 0){
+						this.recipes = response.data;		
+					}
+					else if(result === 0){
+						this.recipes = -1;
+					}
+
 				})
 				.catch(error =>{
-					console.log(error.response);
+					if(error.response.status === 500){ 
+						this.$swal.fire({
+						  	text: "Something wrong has happened.\n Please again.",
+						  	type: 'warning',
+						  	confirmButtonColor: '#3085d6',
+						  	confirmButtonText: 'OK!'
+							}).then((result) => {
+						  		router.replace('/')
+						})
+					}
 				});
 			}
 		}	
@@ -132,5 +155,21 @@
 				}
 			}
 		}
+	}
+
+	.message{
+		@include absolute-center(50%, 50%);
+		font-family: $font;
+		font-size: 24px;
+		color: $colorPetrol;
+
+		@include mq-mobile {
+			font-size: 18px;
+		}
+
+		@include mq-tablet {
+			font-size: 24px;
+		}
+
 	}
 </style>

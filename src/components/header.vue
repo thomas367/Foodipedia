@@ -51,14 +51,24 @@
 			},
 			onSearch(){
 				const formData = {
-					search: this.search
+					search: this.search.trim()
 				}
-				this.$router.push({
-					name: 'searchRecipes',
-					params: {
-						keyword: this.search
-					}
-				});
+				if(this.search === ''){
+					this.$swal.fire({
+						text: "Please fulfill the field.",
+						type: 'info',
+						confirmButtonColor: '#3085d6',
+						confirmButtonText: 'OK!'
+					})
+				}
+				else{
+					this.$router.push({
+						name: 'searchRecipes',
+						params: {
+							keyword: this.search
+						}
+					});
+				}
 			}
 		}
 	}

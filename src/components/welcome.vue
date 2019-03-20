@@ -58,9 +58,6 @@
 				axios.get('/recipes')
 				.then(response =>{
 					this.recipes = response.data;
-				})
-				.catch(error =>{
-					console.log(error.response);
 				});
 			}
 		}	
