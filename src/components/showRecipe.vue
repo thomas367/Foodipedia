@@ -64,12 +64,13 @@
 		},
 		methods: {
 			getRecipeData: function(){
-				axios.get('/showRecipe/'+this.recipeId)
+				axios.get('/getRecipeData/'+this.recipeId)
 				.then(response =>{
 					this.recipe = response.data.recipe;
 					this.ingredients = response.data.ingredients;
 				})
 				.catch(error =>{
+					console.log(error.response)
 					if(error.response.status === 404){
 						this.$swal.fire({
 							text: "This recipe don't exists.",
@@ -77,7 +78,7 @@
 							confirmButtonColor: '#3085d6',
 							confirmButtonText: 'OK!'
 							}).then((result) => {
-							router.replace('/')
+								router.replace('/')
 						})
 					}
 				});

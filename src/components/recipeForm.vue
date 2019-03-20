@@ -1,7 +1,7 @@
 <template>
 	<div id="recipeform">
 		<div class="recipe-form">
-			<b-form @submit.prevent="onSubmit">
+			<b-form @submit.prevent="createRecipe">
 				<!-- Image section -->	
 				<div class="row">
 					<div class="image">
@@ -88,11 +88,11 @@
 					<div class="ingredients">
 						<b-button id="add" type="button" size="sm" @click="onAddIngredient">Add ingredients</b-button> 
 						<div class="ingredients-list">
-							<div class="input" v-for="(ingredient, index) in ingredients" :class="{invalid: errors.has('ingredient'+index) || errors.has('quantity'+index)}">
+							<div class="input" v-for="(ingredient, index) in ingredientsList" :class="{invalid: errors.has('ingredient'+index) || errors.has('quantity'+index)}">
 								<div class="row">
 									<div class="ingredient">
 										<label :for="ingredient">Ingredient</label> 
-										<b-form-input type="text" id="ingredient" v-model="ingredient.ingredient" :data-vv-name="'ingredient'+index" v-validate="'required'"/>
+										<b-form-input type="text" id="ingredient" v-model="ingredient.ingredient_name" :data-vv-name="'ingredient'+index" v-validate="'required'"/>
 									</div>
 									<div class="space">&nbsp;</div>
 									<div class="quantity">
@@ -124,50 +124,74 @@
 	import router from '@/router'
 
 	export default{
+		/* recipe id (for edit recipe)  */
+		props: ['id'],
 		data: function(){
 			return{
+				recipeId: this.id,
+				recipe: [],
 				url: null,
 				recipe_name: '',
 				cuisine: '',
 				category: '',
 				directions: '',
 				image: null,
-				ingredients: [],
+				ingredientsList: [],
 				validatedErrors: []
 			}
 		},
+		/* Check if all the fields are submitted */
 		computed: {
 			isComplete: function(){
-				return this.recipe_name && this.cuisine && this.category && this.directions && this.image && this.ingredients[0]
+				return this.recipe_name && this.cuisine && this.category && this.directions && this.image && this.ingredientsList[0]
+			}
+		},
+		/* Gets the recipe data with 
+		 * the specific recipeId 
+		 * to edit the recipe.
+		 *
+		 * Execute only on edit mode.
+		 */
+		created(){
+			if(this.recipeId){
+				this.getRecipeData(this.recipeId)
 			}
 		},
 		methods: {
 			/* Add ingredient */
 			onAddIngredient: function() {
-		        this.ingredients.push({
+		        this.ingredientsList.push({
 		        	ingredient: '',
 		        	quantity: ''
 		        })  
 		    },
 		    /* Remove ingredient */
 		    onDeleteIngredient: function(index) {
-		        this.ingredients.splice(index, 1)
+		        this.ingredientsList.splice(index, 1)
 		    },
 			/* Get image from input and preview action */
 			onImageSelect: function(event){
 				this.image = event.target.files[0];
 				this.url = URL.createObjectURL(this.image);
 			},
+			/* Get recipe data to populate the form. */
+			getRecipeData: function(recipeId){
+				axios.get('/getRecipeData/'+recipeId)
+				.then(response => {
+					this.recipe = response.data.recipe;
+					this.ingredientsList = response.data.ingredients;
+				})
+			},
 		    /* Submit recipe action */
-			onSubmit: function(){
+			createRecipe: function(){
 				const formData = new FormData();
 				formData.append('recipe_name', this.recipe_name);
 				formData.append('cuisine', this.cuisine);
 				formData.append('category', this.category);
 				formData.append('directions', this.directions);
 				formData.append('image', this.image);
-				formData.append('ingredient', this.ingredients.map(ingredient => ingredient.ingredient));
-				formData.append('quantity', this.ingredients.map(ingredient => ingredient.quantity));
+				formData.append('ingredient', this.ingredientsList.map(ingredient => ingredient.ingredient_name));
+				formData.append('quantity', this.ingredientsList.map(ingredient => ingredient.quantity));
 				
 				const token = localStorage.getItem('token');
 				axios.post('/storeRecipe',formData,{
@@ -203,6 +227,7 @@
 						})
 					}
 				});	
+
 			}
 		}
 	}
@@ -316,6 +341,13 @@
 			background-color: $colorPetrol;
 			color: $colorLightOrange;
 		}
+
+		.ingredient input, .quantity input {
+			border-sizing: border-box;
+			border: 1px solid $colorLightBlack;
+			font: inherit;
+		}
+
 	}	
 
 	.submit{
