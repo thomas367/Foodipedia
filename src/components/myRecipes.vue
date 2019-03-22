@@ -60,15 +60,13 @@
 				})
 			},
 			/* Edit recipe */
-			editRecipe: function(recipeId){
-			/*	
+			editRecipe: function(recipeId){	
 				this.$router.push({
 					name: 'recipeForm',
 					params: {
 						id: recipeId
 					}
 				})
-				*/
 			},
 			/* Delete recipe */
 			deleteRecipe: function(recipeId, index){

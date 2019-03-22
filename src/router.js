@@ -54,6 +54,8 @@ export default new Router({
     },
     {
       path: '/recipeForm',
+      name: 'recipeForm',
+      props:true,
       component: RecipeFormPage,  
       beforeEnter(to, from, next){
         if(localStorage.getItem('token')){
