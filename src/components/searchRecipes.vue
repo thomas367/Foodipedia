@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid">
-		<div class="row">
-			<div v-if="recipes.length > 0">
+		<div v-if="recipes.length > 0">
+			<div class="row">
 				<div class="recipe clearfix" v-for="recipe in recipes">
 					<div class="recipe_card" @click="showRecipe(recipe.recipe_id)">
 						<!-- Image section -->
@@ -24,14 +24,14 @@
 								<p>{{recipe.category}}</p>
 							</div>
 						</div>			
-			 		</div>
+				 	</div>
 				</div>
 			</div>
-			<div v-else-if="recipes === -1">
-				<div class="message">
-					<p>There isn't any recipe with this word.</p>
-					<p>Please check if you typed the word correctly or try with another one.</p>
-				</div>
+		</div>
+		<div v-else-if="recipes === -1">
+			<div class="message">
+				<p>There isn't any recipe with this word.</p>
+				<p>Please check if you typed the word correctly or try with another one.</p>
 			</div>
 		</div>
 	</div>
