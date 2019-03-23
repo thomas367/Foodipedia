@@ -58,8 +58,11 @@
 				axios.post('/register', formData)
 			  	.then(response => {
 			        if(response.data.success === true){
-			        	const token = response.data.token
-			        	this.$store.dispatch('setUserState', token)
+			        	const payload = {
+			        		token: response.data.token,
+			        		expiresIn: response.data.expiresIn
+			        	}
+			        	this.$store.dispatch('setUserState', payload)
 			        }
 			        else if(response.data.success === false){
 			        	this.validatedErrors = response.data.error

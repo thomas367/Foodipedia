@@ -5,8 +5,12 @@
 				<!-- Edit mode -->
 				<b-form @submit.prevent="editRecipe">
 					<!-- Image section -->	
-					<div class="row">
-						<div class="image hidden">
+					<div class="img-wrap" v-show="isHidden">
+						<span class="close" @click="isHidden ^=true">&times;</span>
+						<b-img :src="recipe[0].img_path" height="200" width="200"/>
+					</div>
+					<div class="row" v-show="!isHidden">
+						<div class="image">
 							<div class="input" :class="{invalid: errors.has('image') || validatedErrors.image}">
 								<label for="image">Image</label>
 								<b-form-file id="image" placeholder="Choose an image..." accept="image/*" @change="onImageSelect($event)" data-vv-name="image" v-validate="'required'"/>
@@ -250,6 +254,7 @@
 		props: ['id'],
 		data: function(){
 			return {
+				isHidden: true,
 				recipeId: this.id,
 				recipe: [],
 				url: null,
@@ -457,6 +462,33 @@
 
 	.image, .recipeName, .cuisine, .category, .description, .ingredients, .ingredients-list, .submit{
 		padding-left: 12px;
+	}
+
+	.img-wrap{
+		position: relative;
+		display: inline-block;
+		font-size: 0px;
+
+		.close{
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			z-index: 100;
+			background-color: #ffffff;
+			padding: 1px;
+			color: #000000;
+			font-weight: bold;
+			font-size: 22px;
+			cursor: pointer;
+			opacity: 0.2;
+			text-align: center;
+		}
+	}
+
+	.img-wrap:hover{
+		.close{
+			opacity: 1;
+		}
 	}
 
 	.input{

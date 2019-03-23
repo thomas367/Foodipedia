@@ -22,25 +22,42 @@ export default new Vuex.Store({
     /*** On refresh page keeps the user connected ***/
     keepLogin({commit}){
       const token = localStorage.getItem('token')
+      /* Check if there is a token */
       if(!token){
-        return
+        commit('clearAuthData')
+        localStorage.removeItem('token')
+        localStorage.removeItem('expirationDate')
+        router.replace('/signin')
       } 
+      const expirationDate = localStorage.getItem('expirationDate')
+      const now = new Date();
+      /* Check if the token has expired */
+      if(now >= expirationDate){
+        commit('clearAuthData')
+        localStorage.removeItem('token')
+        localStorage.removeItem('expirationDate')
+        router.replace('/signin')
+      }
       commit('authUser', {
         token: token
       })
     },
     /*** Set user state on successful login or register ***/
-    setUserState({commit}, token){
+    setUserState({commit}, payload){
       commit('authUser', {
-        token: token
-      })
-      localStorage.setItem('token', token);
-      router.replace('/')
+        token: payload.token
+      }) 
+      const now = new Date();
+      const expirationDate = new Date(now.getTime() + payload.expiresIn * 1000);
+      localStorage.setItem('token', payload.token);
+      localStorage.setItem('expirationDate', expirationDate);
+      router.replace('/');
     },
   	/*** Logout Action ***/
   	logout({commit}){
   		commit('clearAuthData')
       localStorage.removeItem('token')
+      localStorage.removeItem('expirationDate')
       router.replace('/')
   	}
   },
